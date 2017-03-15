@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" ng-app>
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <link rel="stylesheet" href="static/css/bootstrap.min.css">
+    <script src="static/js/angular.js"></script>
+<!--    <script src="static/js/controllers.js"></script>-->
+</head>
+<body ng-controller="demo5">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-3">
+                search:<input type="text" ng-model="sun" ng-change="demo()">
+            </div>
+            <div class="col-xs-9 sidebar">
+                <dl ng-repeat="items in sidebar | filter:sun">
+                    <dt>{{items.name}}</dt>
+                    <dd>{{items.cont}}</dd>
+                </dl>
+            </div>
+        </div>
+    </div>
+    
+    
+    <script>
+    function demo5($scope){
+        $scope.sidebar = [
+            {"name":"孙伟鹏",
+             "cont":"18395215415"},
+            {"name":"张三",
+             "cont":"13934340312"},
+            {"name":"李四",
+             "cont":"15829740801"}
+        ];   
+        $scope.demo=function(){
+        console.log($scope.sun);
+            }
+    };
+    </script>
+</body>
+</html>

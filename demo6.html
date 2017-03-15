@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en" ng-app ng-controller="demo6">
+<head>
+    <meta charset="UTF-8">
+    <title>当前标题{{tit}}</title>
+    <link rel="stylesheet" href="static/css/bootstrap.min.css">
+    <script src="static/js/angular.js"></script>
+    <script src="static/js/controllers.js"></script>
+</head>
+<body>
+<!--本例中标题由控制器来决定-->
+<div class="container" ng-controller="demo6">
+    <div class="row">
+        <div class="col-xs-12">
+           
+           
+            <div class="row">
+                <div class="col-xs-4">
+                    <!-- 双重查询 -->
+                    <!-- search: <input type="text" ng-model="query" > -->
+                    <!-- 默认显示所有地区，如果有选择，显示分地区 -->
+                    <div ng-model="query">{{query||'所有地区'}}</div>
+                    <ul>
+                        <li ng-click="chk('银川')">银川</li>
+                        <li ng-click="chk('石嘴山')">石嘴山</li>
+                        <li ng-click="chk('中卫')">中卫</li>
+                    </ul>
+                </div>
+                <div class="col-xs-4">
+                    <select name="" id="" ng-model="row" class="form-control">
+                        <option value="">城市</option>
+                        <option value="银川">银川</option>
+                        <option value="石嘴山">石嘴山</option>
+                        <option value="中卫">中卫</option>
+                    </select>
+                </div>
+                <div class="col-xs-4">
+                    sort by:
+                    <select name="" id="" ng-model="orderProp">
+                        <option value="name">按名字来排名</option>
+                        <option value="age">按年龄来排名</option>
+                    </select>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12">
+                    <ul class="phones">
+                        <!-- 写两个过滤器，既可以用query，又可以用row -->
+                        <li ng-repeat="phone in phones | filter:query | filter:row | orderBy:orderProp" >
+                            <h3>{{phone.name}}</h3>
+                            <p>{{phone.snippet}}</p>
+                            <p>{{phone.age}}</p>
+                            <p>{{phone.city}}</p>
+                            <p>{{phone.pinpai}}</p>
+                            <p ng-show="phone.pinpa!='123'">{{phone.pinpa}}</p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            
+        </div>
+    </div>
+</div>
+</body>
+</html>

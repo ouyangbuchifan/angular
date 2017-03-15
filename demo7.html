@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" ng-app ng-controller="demo7">
+
+<head>
+    <meta charset="UTF-8">
+    <title>链接和图片</title>
+    <link rel="stylesheet" href="static/css/bootstrap.min.css">
+    <script src="static/js/angular.js"></script>
+    <script src="static/js/controllers.js"></script>
+</head>
+
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-4">
+                search: <input type="text" ng-model="demo7">
+            </div>
+            <div class="col-xs-8">
+                
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12">
+                <ul class="phones">
+                    <li ng-repeat="phone in phones | filter:demo7">
+                        <a href="javascript:;">
+                            <img ng-src="{{phone.imageUrl}}" alt="">
+                        </a>
+                        <a href="javascript:;">{{phone.name}}</a>
+                        <p>{{phone.snippet}}</p>
+
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

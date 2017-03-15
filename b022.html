@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<title>b02的模块化写法</title>
+		<meta name="description" content="">
+		<meta name="keywords" content="">
+	    <link rel="stylesheet" href="static/css/bootstrap.min.css">
+	    <script src="static/js/angular.js"></script>
+	    <script src="static/js/controllers.js"></script>
+	</head>
+<body ng-controller="book22">
+    <p>{{someText.message}}</p>
+    <!--利用filter格式化时间-->
+    <p>time: {{now|date:'yyyy-MM-dd hh:mm:ss'}}</p>
+    
+<!--<script type="text/javascript" src="static/js/book.js"></script>-->
+    <script>
+    var myAppModule=angular.module('myApp',[]);
+    myAppModule.controller("book22",function($scope){
+        var someText={};	
+        someText.message="这里是模块化的写法";
+        $scope.someText=someText;	//页面中的someText对应这里的someText对象
+        // 输出时间
+        //var now=new Date();
+        $scope.now=new Date();
+        console.log(new Date());
+    });
+    </script>
+</body>
+</html>

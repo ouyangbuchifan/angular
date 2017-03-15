@@ -1,0 +1,41 @@
+<!doctype html>
+<html ng-app>
+
+<head>
+    <meta charset="utf-8">
+    <title>My HTML File</title>
+
+    <script src="static/js/jquery-1.9.1.min.js"></script>
+    <script src="static/js/angular.js"></script>
+</head>
+
+<body ng-controller="demo">
+
+    
+    
+    
+    <input type="text" ng-model="userName" placeholder="请输入你的名字">
+    <h2>你好，{{userName}}</h2>
+    
+    
+    <p>Nothing here {{'yet' + '!'}}</p>
+
+    <hr>
+    <ul>
+    	<li ng-click="chk('孙伟鹏')">孙伟鹏</li>
+    	<li ng-click="chk('王悦')">王悦</li>
+    	<li ng-click="chk('学子')">学子</li>
+    </ul>
+    <h4>你好， {{myname}}</h4>
+
+    <script>
+    function demo($scope){
+    	$scope.chk=function(txt){
+			$scope.myname=txt;
+    	}
+
+    }
+    </script>
+</body>
+	
+</html>

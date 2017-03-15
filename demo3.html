@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" ng-app>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <link rel="stylesheet" href="static/css/bootstrap.min.css">
+    <script src="static/js/angular.js"></script>
+    <script src="static/js/controllers.js"></script>
+</head>
+
+<body class="container" ng-controller="PhoneListCtrl">      
+<!--对应控制器的方法名，那个方法下的所有的数据绑定对ng-controller为PhoneListCtrl内都有效-->
+
+<!--    demo1-->
+    <p>
+        1+2={{1+2}}
+    </p>
+    <hr>
+
+<!--    demo2-->
+    <ul>
+        <li ng-repeat="phone in phones">    <!--这里就是循环的内容-->         
+            {{phone.name}}
+            <p>{{phone.snippet}}</p>
+            <p>{{echo}}</p>
+        </li>
+    </ul>
+    <!--内容输出在控制器里-->
+    <p>
+        输出phone的个数 {{phones.length}}
+    </p>
+    <!--输出另外一个内容-->
+    <p>{{hello}}</p>
+    <div>
+        {{bing}}
+    </div>
+</body>
+
+</html>

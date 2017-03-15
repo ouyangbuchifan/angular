@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" ng-app>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <link rel="stylesheet" href="static/css/bootstrap.min.css">
+    <script src="static/js/angular.js"></script>
+    <script src="static/js/controllers.js"></script>
+</head>
+<body>
+    <div class="container-fluid" ng-controller="PhoneListCtrl">
+        <div class="row">
+            <div class="col-xs-2">
+                <!--sidebar content-->
+                search: <input ng-model="query">
+            </div>
+            <div class="col-xs-10">
+                <!--body content-->
+                <ul class="phones">
+                    <li ng-repeat="phone in phones | filter:query">
+                        {{phone.name}}
+                        <p>{{phone.snippet}}</p>
+                    </li>
+                </ul>
+            </div>
+        </div>    
+        <hr>
+        <div class="row">
+            <div class="col-xs-12">
+                <table class="table">
+                    <tr>
+                        <td>row number</td>
+                        <td ng-repeat="i in [0,1,2,3,4,5,6,7]">
+                           {{i}}
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+    
+    <script type="text/javascript">
+    	function PhoneListCtrl($scope) {
+			$scope.phones = [
+			    {"name": "标题1",
+				 "snippet": "最快的速度来访问页面"},
+				{"name": "标题2",
+				 "snippet": "下一个"},
+				{"name": "标题3",
+				 "snippet": "文本内容"},
+				{"name":"这是新加的标题",
+				 "snippet":"这是新加的内容"}
+				];
+				$scope.hello="这是什么内容";
+				$scope.bing="今天又发烧了！";
+		};
+    </script>
+</body>
+</html>

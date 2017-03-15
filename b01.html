@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html ng-app>
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<title>Examples</title>
+		<meta name="description" content="">
+		<meta name="keywords" content="">
+	    <link rel="stylesheet" href="static/css/bootstrap.min.css">
+        <scirpt src="static/js/jquery-1.9.1.min.js"></scirpt>
+	    <script src="static/js/angular.js"></script>
+	    <script src="static/js/controllers.js"></script>
+	</head>
+<body ng-controller="book">
+    <h1>Your Order</h1>
+	<div ng-repeat="item in items">
+		<span>{{item.title}}</span>
+		<!-- 定义商品数量 -->
+		<input type="text" ng-model="item.quantity">	
+        <!--ng-model定义创建了输入字段和item.quantity之间的数据绑定-->
+        
+		<!-- 商品单价 -->
+		<span>{{item.price | currency}}</span>
+		<span>/</span>
+		<!-- 商品总价 -->
+		<span>{{item.price*item.quantity | currency}}</span>
+		<button ng-click="remove($index)">Remove</button>
+		<hr>
+		
+	</div>
+	<hr>
+<!--	<div>{{xie||"未查询到":"MB"}}</div>-->
+
+<script type="text/javascript" src="static/js/book.js"></script>
+</body>
+</html>

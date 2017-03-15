@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html ng-app="myapp_04">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<title>显示文本</title>
+		<meta name="description" content="">
+		<meta name="keywords" content="">
+	    <link rel="stylesheet" href="static/css/bootstrap.min.css">
+	    <script src="static/js/angular.js"></script>
+	</head>
+<body ng-controller="b04">
+    <p>{{mytext.sometext}}</p>
+	<hr>
+	<!-- 另外一种绑定的方法是这样，防止网络问题显示标签{{mytext.sometext}} -->
+	<p ng-bind="mytext.sometext"></p>
+
+	<!-- 注：这两种方式都可以显示。区别：如果浏览器加载页面过慢，第一种方式，用户有可能看到{{mytext.sometext}}原本内容，两个花括号及里面的内容。第二种方式缺点是没有第一种简单 -->
+
+<script type="text/javascript" src="static/js/b04.js"></script>
+</body>
+</html>
