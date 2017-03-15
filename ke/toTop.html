@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html ng-app="mymodule">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<title>返回顶部</title>
+		<meta name="description" content="">
+		<meta name="keywords" content="">
+		<link href="" rel="stylesheet">
+		<script src="http://cdn.bootcss.com/jquery/2.1.4/jquery.js"></script>
+		<script src="/static/js/angular.js"></script>
+		<style>
+			/*CSS源代码*/
+			body{
+				background:#CFCFCF;
+			}
+			*{padding: 0;margin: 0;}
+			.full{
+				height: 500px;
+				width: 100%;
+				background: #001E3B;
+				font-size: 400%;
+				color: #fff;
+				text-align: center;
+			}
+			.go_top{
+				width: 50px;
+				height: 50px;
+				background: #fff;
+				position: fixed;
+				z-index: 999;
+				right: 5px;
+				bottom: 5px;
+				font-size: 200%;
+				text-align: center;
+				cursor: pointer;
+				font-size: 1.2px;
+			}
+			
+			.animate{
+				animation: go 1s ease-out;
+				-webkit-animation: go 1s ease-out;
+			}
+			
+			@keyframes go{
+				from{height: 50px;}
+				to{height: 1000px;}
+			}
+			@-webkit-keyframes go{
+				from{height: 50px;}
+				to{height: 1000px;}
+			}
+			
+			.goback{
+				animation: goback .9s ease-in;
+				-webkit-animation: goback .9s ease-in;
+			}
+			@keyframes goback{
+				from{height: 1000px;}
+				to{height: 50px;}
+			}
+			@-webkit-keyframes goback{
+				from{height: 1000px;}
+				to{height: 50px;}
+			}
+		</style>
+	</head>
+<body>
+<div class="wrap">
+    <div class="container my" ng-controller="myCtrl" id="container">
+    	<div style="background:#f60;height:4000px"></div>
+    	<span class="go_top" to-top ng-class="{'animate':kg,goback:!kg}">返回顶部</span>
+    </div>
+</div>
+    
+    <script src="/static/js/toTop.js"></script>
+</body>
+</html>

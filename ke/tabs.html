@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="mymodule">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<title>选项卡</title>
+		<meta name="description" content="">
+		<meta name="keywords" content="">
+		<script src="/static/js/angular.js"></script>
+		<style>
+			.my_tab{width: 300px;border:1px solid #ccc;overflow: hidden;}
+			ul,li{list-style: none;text-indent: 0;margin: 0;padding: 0}
+			.my_tab li{float: left;width: 100px;box-sizing:border-box;text-align: center;height: 30px;line-height: 30px;}
+			.tab_active{background: #eee;box-shadow: 0 0 -3px rgba(0,0,0,.4)}
+		</style>
+	</head>
+<body ng-controller="tabs">
+	<p>这个选项卡只在两个的情况下显示正常</p>
+	<hr>
+    <ul class="my_tab">
+	    <li ng-click="changeType(tabType.value,tabType.code)"
+	        ng-class="{tab_active: ($first && tabCode === '1') || ($second && tabCode ==='2') || ($last && tabCode === '3') }"
+	        tabType="{{tabType.value}}" ng-repeat="tabType in tabTypeList">
+	        <span>{{tabType.name}}</span>
+	    </li>
+	</ul>
+	<div ng-switch on="tabType">
+	    <div ng-switch-when="huafei">
+	    	话费
+	    </div>
+	    <div ng-switch-when="yewu">
+	    	业务
+	    </div>
+	    <div ng-switch-when="xinxi">
+	    	信息
+	    </div>
+    </div>
+	
+    <script src="controller/tabs.js"></script>
+</body>
+</html>

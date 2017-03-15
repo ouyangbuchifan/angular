@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html ng-app="mymodule">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<title>多个选项卡</title>
+		<meta name="description" content="">
+		<meta name="keywords" content="">
+		<script src="/static/js/angular.js"></script>
+		<style>
+			.my_tab{width: 300px;border:1px solid #ccc;overflow: hidden;}
+			ul,li{list-style: none;text-indent: 0;margin: 0;padding: 0}
+			.my_tab li{float: left;width: 100px;box-sizing:border-box;text-align: center;height: 30px;line-height: 30px;}
+			.tab_active{background: #eee;box-shadow: 0 0 -3px rgba(0,0,0,.4)}
+		</style>
+	</head>
+<body ng-controller="tabs">
+    <ul class="my_tab">
+    	<li ng-repeat="tabMenu in tabMenuList" ng-click="changeTabMenu(tabMenu.value,tabMenu.code,$index)" tabMenu="{{tabMenu.value}}" ng-class="{tab_active:$index===nowIndex}">
+    		<span>{{tabMenu.name}}</span>
+    	</li>
+    </ul>
+    <div ng-switch on="tabMenu">
+    	<div ng-switch-when="yidong">1</div>
+    	<div ng-switch-when="liantong">2</div>
+    	<div ng-switch-when="dianxin">3</div>
+    </div>
+
+    <script src="controller/tabs2.js"></script>
+</body>
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html ng-app="mymodule">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<title>返回顶部</title>
+		<meta name="description" content="">
+		<meta name="keywords" content="">
+		<link href="" rel="stylesheet">
+		<script src="http://cdn.bootcss.com/jquery/2.1.4/jquery.js"></script>
+		<script src="/static/js/angular.js"></script>
+		<style>
+			/*CSS源代码*/
+			body{
+				background:#CFCFCF;
+			}
+			*{padding: 0;margin: 0;}
+			.full{
+				height: 500px;
+				width: 100%;
+				background: #001E3B;
+				font-size: 400%;
+				color: #fff;
+				text-align: center;
+			}
+			.go_top{
+				display: none;
+				width: 50px;
+				height: 50px;
+				background: #fff;
+				position: fixed;
+				z-index: 999;
+				right: 5px;
+				bottom: 5px;
+				font-size: 200%;
+				text-align: center;
+				cursor: pointer;
+				font-size: 1.2px;
+			}
+			
+			
+		</style>
+	</head>
+<body>
+<div class="wrap">
+    <div class="container my" ng-controller="myCtrl" id="container">
+    	<div style="background:#f60;height:4000px"></div>
+    	<span class="go_top" to-top>返回顶部</span>
+    </div>
+</div>
+    
+    <script src="/static/js/toTop2.js"></script>
+</body>
+</html>

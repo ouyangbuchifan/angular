@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html ng-app="mymodule">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<title>选项卡</title>
+		<meta name="description" content="">
+		<meta name="keywords" content="">
+		<script src="/static/js/angular.js"></script>
+		<style>
+			.my_tab{width: 300px;border:1px solid #ccc;overflow: hidden;}
+			ul,li{list-style: none;text-indent: 0;margin: 0;padding: 0}
+			.my_tab li{float: left;width: 100px;box-sizing:border-box;text-align: center;height: 30px;line-height: 30px;}
+			.on{background: #eee;box-shadow: 0 0 -3px rgba(0,0,0,.4)}
+			.my_tab_cont>div{display: none;}
+			.my_tab_cont .active{display: block;}
+		</style>
+	</head>
+<body>
+	
+	<div ng-controller="myCtrl">
+		<ul class="my_tab">
+	    	<li ng-class="{on:tab_menu.state==='1'}" ng-click="resetTab_menu()"><span>我的服务</span></li>
+	    	<li ng-class="{on:tab_menu.state==='2'}" ng-click="tab_menu.state='2'"><span>用户信息</span></li>
+	    	<li ng-class="{on:tab_menu.state==='3'}" ng-click="tab_menu.state='3'"><span>专属优惠</span></li>
+	    </ul>
+	    <div class="my_tab_cont">
+	    	<div ng-class="{active:tab_menu.state==='1'}">1</div>
+	    	<div ng-class="{active:tab_menu.state==='2'}">2</div>
+	    	<div ng-class="{active:tab_menu.state==='3'}">3</div>
+	    </div>
+
+	</div>
+    
+    <script type="text/javascript">
+    	var mymodule=angular.module('mymodule',[]);
+		mymodule.controller('myCtrl',['$scope',function($scope){
+		
+		
+			var fuwu='1',xinxi='2',youhui='3';
+			$scope.tab_menu={
+				state:fuwu,		//也可以不定义变量，直接用1
+			}
+		
+			$scope.resetTab_menu=function(){
+				$scope.tab_menu.state='1';
+			}
+		
+		}]);
+    </script>
+</body>
+</html>
