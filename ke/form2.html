@@ -1,0 +1,46 @@
+<!doctype html>
+<html ng-app="myApp">
+<head>
+    <meta charset="UTF-8">
+    <title>表单ng1.3-</title>
+    <link rel="stylesheet" href="/static/css/bootstrap.min.css">
+    <style>
+        /*在修改的表单项上才显示错误信息*/
+        input.ng-dirty.ng-invalid {
+            border: 1px solid red;
+        }
+    </style>
+</head>
+<body>
+<div ng-controller="testController">
+    <form name="form" ng-submit="save()" novalidate="novalidate">
+ 
+        <input type="text" name="name" ng-model="user.name" required ng-minlength="5" ng-maxlength="20"/>
+        <!--用ng-if好过ng-show 后者刚进页面时会闪一下-->
+        <span class="error" ng-if="form.$dirty && form.name.$invalid">填写不正确</span>
+        <br />
+ 
+        <input type="text" name="email" ng-model="user.email" required
+               ng-pattern="/^([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+@([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+\.[a-zA-Z]{2,3}$/"/>
+        <span class="error" ng-if="form.$dirty && form.email.$invalid">填写格式错误</span>
+        <br />
+        <input type="submit" value="提交" class="btn btn-primary" ng-disabled="form.$invalid"/>
+    </form>
+ 
+</div>
+<script src="http://cdn.staticfile.org/angular.js/1.3.0-beta.8/angular.min.js"></script>
+<script>
+    var myApp = angular.module('myApp', []);
+    myApp.controller('testController', function($scope){
+        $scope.save = function () {
+            //获取到表单是否验证通过
+            if($scope.form.$valid){
+                alert('通过验证可以提交表单');
+            }else{
+                alert('表单没有通过验证');
+            }
+        }
+    })
+</script>
+</body>
+</html>

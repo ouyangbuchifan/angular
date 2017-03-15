@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="mymodule">
+<head>
+    <meta charset="UTF-8">
+    <title>scope =号绑定</title>
+    <link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.4/css/bootstrap.min.css">
+    <script src="/static/js/angular.js"></script>
+</head>
+<body>
+    <div ng-controller="MyCtrl" class="container">
+       <div class="row">
+           <p class="lead">
+               = 号绑定用于与父层scope中的属性进行双向绑定
+           </p>
+           <hr>
+           <p>
+               Ctrl:
+                <br>
+                <input type="text" ng-model="ctrlFlavor">
+           </p>
+            <p>
+            directive: 
+            <br>
+                <drink flavor="ctrlFlavor"></drink>
+            </p>
+            
+        </div>
+    </div>
+    
+    
+<!--    <script src="directive/dt8.js"></script>-->
+    
+    <script>
+    var mymodule=angular.module('mymodule',[]);
+    mymodule.controller('MyCtrl',['$scope',function($scope){
+        $scope.ctrlFlavor="百威";
+
+    }]);
+
+    mymodule.directive('drink',function(){
+        return {
+            restrict:'AE',
+            scope:{
+                flavor:'='
+            },
+            template:'<input type="text" ng-model="flavor" />'
+        };
+    });
+    </script>
+</body>
+</html>

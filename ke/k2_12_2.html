@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html ng-app="mymodule">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<title>复杂点的form</title>
+		<meta name="description" content="">
+		<meta name="keywords" content="">
+		<link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.4/css/bootstrap.min.css">
+    	<script src="/static/js/angular.js"></script>
+	</head>
+<body>
+    <div class="container" ng-controller="myCtrl">
+    	<form name="form" class="css-form" novalidate>
+			姓名:
+			<input type="text" ng-model="user.name" name="uName" required /><br/>
+			邮箱:
+			<input type="email" ng-model="user.email" name="uEmail" required /><br/>
+			<div ng-show="form.uEmail.$dirty && form.uEmail.$invalid">
+				提示:
+				<span ng-show="form.uEmail.$error.required">请输入邮箱</span>
+				<span ng-show="form.uEmail.$error.email">不是一个合法邮箱</span>
+			</div>
+			Gender:<br/>
+			<input type="radio" ng-model="user.gender" value="male" />
+			male
+			<input type="radio" ng-model="user.gender" value="female" />
+			female<br/>
+			<input type="checkbox" ng-model="user.agree" name="userAgree" required />
+			I agree:
+			<input ng-show="user.agree" type="text" ng-model="user.agreeSign" required />
+			<div ng-show="!user.agree || !user.agreeSign">
+				Please agree and sign.
+			</div>
+			<br/>
+			<button ng-click="reset()" ng-disabled="isUnchanged(user)">
+				RESET
+			</button>
+			<button ng-click="update(user)" ng-disabled="form.$invalid || isUnchanged(user)">
+				SAVE
+			</button>
+		</form>
+    </div>
+	
+	<!-- 
+	<script src="controller/k_2_12.js"></script>
+	 -->
+	<script>
+	var mymodule=angular.module('mymodule',[]);
+	mymodule.controller('myCtrl',['$scope',function($scope){
+		$scope.master = {};
+
+		$scope.update = function(user) {
+			$scope.master = angular.copy(user);
+		};
+
+		$scope.reset = function() {
+			$scope.user = angular.copy($scope.master);
+		};
+
+		$scope.isUnchanged = function(user) {
+			return angular.equals(user, $scope.master);
+		};
+
+		$scope.reset();
+	}]);
+	</script>
+</body>
+</html>

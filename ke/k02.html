@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en" ng-app>
+<head>
+	<meta charset="UTF-8">
+	<title>angular的controller</title>
+	<link rel="stylesheet" href="/static/css/bootstrap.min.css">
+	<script src="/static/js/jquery-1.9.1.min.js"></script>
+    <script src="/static/js/angular.js"></script>
+</head>
+<body>
+	<!--不要在控制器里继续套用控制器，控制器不可嵌套。比如helloangular里不可有别的控制器，如果有公用的，可以放servers-->
+    <div ng-controller="helloangular">
+        {{greeting.text}},angulary
+    </div>
+	<!--
+	    不要复用controller，一个控制器只负责一小块视图
+	    不在控制器操作DOM，非控制器职能
+	    不在控制器里做数据格式化，ng有表单控件
+	    不在控制器里做数据过滤，ng有$filter服务
+	    控制器之间不做互相调用，控制器之间交互用事件进行交互，
+	-->
+	
+
+
+
+	
+	<!-- 
+		<script src="controller/k02.js"></script>
+	 -->
+	<script>
+	/**
+	 * 
+	 * @authors Your Name (you@example.org)
+	 * @date    2015-07-02 17:36:56
+	 * 这种方式不推荐使用，没有模块化
+	 * 控制器连接视图与模型
+	 */
+
+	function helloangular($scope){
+	    $scope.greeting={
+	        text:'hello',
+	    }
+	}
+	</script>
+</body>
+</html>

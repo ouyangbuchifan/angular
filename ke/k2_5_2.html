@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="showHide">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <title>ngshow 显示隐藏-双向数据绑定</title>
+    <link rel="stylesheet" href="/static/css/bootstrap.min.css">
+    <script src="/static/js/jquery-1.9.1.min.js"></script>
+    <script src="/static/js/angular.js"></script>
+</head>
+<body>
+    
+    <div class="container" ng-controller="showCtrl">
+        <div class="panel panel-danger">
+            <div class="panel-heading clearfix" >
+                <h5 class="pull-left">{{tit_main}}</h5>
+                <p class="pull-right" ng-click="toggleMenu()">显示与隐藏</p>
+            </div>
+            <ul class="panel-body" ng-show="tabMenu.show" ng-repeat="item in items">
+                <li><a href="{{item.url}}">{{item.name}}</a></li>
+            </ul>
+        </div>
+    </div>
+    
+    <script>
+    	var k2=angular.module('showHide',[]);
+		k2.controller('showCtrl',['$scope',function($scope){
+		    $scope.tabMenu={show:true};
+		    $scope.toggleMenu=function(){
+		        $scope.tabMenu.show=!$scope.tabMenu.show;
+		    }
+		    $scope.tit_main="新闻列表";
+		    $scope.items=[{
+		        name:'“中国5G频谱规划战略研讨会”在厦门圆满召开',
+		        read:50,
+		        url:'http://www.10086.cn/aboutus/news/GroupNews/201507/t20150723_59313.htm'
+		    },{
+		        name:'中国移动发布NovoNet2020愿景 推出下一代网络品牌',
+		        read:66,
+		        url:'http://www.10086.cn/aboutus/news/GroupNews/201507/t20150716_59273.htm'
+		    },{
+		        name:'中国移动助力互联网+发展 三大举措圆梦技术愿景2020+',
+		        read:799,
+		        url:'http://www.10086.cn/aboutus/news/GroupNews/201507/t20150716_59272.htm'
+		    }];
+		}]);
+
+    </script>
+</body>
+</html>

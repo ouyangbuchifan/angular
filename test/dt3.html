@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html ng-app="myapp">
+<head>
+<meta charset="utf-8">
+<title>手风琴&&选项卡</title>
+<link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css">
+</head>
+<body>
+
+
+
+<div ng-controller="myCtrl" class="container">
+    <!-- 手风琴 -->
+    <article class="panel panel-default mt-sm">
+        <div ng-click="setShow(0)" class="panel-heading">手风琴效果</div>
+        <div ng-show="show[0]" class="panel-body">这里是手风琴内容</div>
+    </article>
+    <article class="panel panel-default">
+        <div ng-click="setShow(1)" class="panel-heading">手风琴效果2</div>
+        <div ng-show="show[1]" class="panel-body">这里是内容，可以复用哦</div>
+    </article>
+
+    <!-- 选项卡 -->
+    <ul class="nav nav-pills">
+        <li ng-class="{'active':show[21]}" ng-click="setShow(21)"><a href="javascript:;">生活</a></li>
+        <li ng-class="{'active':show[22]}" ng-click="setShow(22)"><a href="javascript:;">科技</a></li>
+        <li ng-class="{'active':show[23]}" ng-click="setShow(23)"><a href="javascript:;">生物</a></li>
+    </ul>
+    <div class="tab-content">
+        <div ng-show="show[21]">生活内容</div>
+        <div ng-show="show[22]">科技内容</div>
+        <div ng-show="show[23]">生物内容</div>
+    </div>
+
+    <!-- 类modal开关 -->
+    <article>
+        <div class="btn btn-primary" ng-click="modal=true">显示modal</div>
+        <div class="panel" ng-show="modal">
+            这里是modal内容<br>
+            <div class="btn btn-danger" ng-click="modal=false">关闭</div>
+        </div>
+    </article>
+    
+    <!-- ng-repeat -->
+    <ul class="list">
+    	<li ng-repeat="item in items">
+    		<span ng-bind="item.value"></span>
+    	</li>
+    </ul>
+</div>
+
+<script src="http://apps.bdimg.com/libs/angular.js/1.4.6/angular.min.js"></script> 
+<script>
+angular.module("myapp", []).controller("myCtrl", function($scope){
+
+    // 手风琴&&选项卡
+    $scope.show = [false];
+    $scope.show[21] = true;
+    $scope.setShow = function(sta){
+        var nowSta = $scope.show[sta];
+        $scope.show = [false];
+        $scope.show[sta] = !nowSta;
+    }
+
+    // 类modal开关
+    $scope.modal = false;
+    
+    // 列表 只能循环对象数组，不能是纯数组
+    $scope.items = [{
+    		id:0,
+    		value:"科技"
+		},{
+    		id:1,
+    		value:"教育"
+    	},{
+    		id:2,
+    		value:"生活"
+		}
+    ]
+})
+
+</script>
+</body>
+</html>

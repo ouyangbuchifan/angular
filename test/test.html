@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width,initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no" />
+	    <meta content="telephone=no" name="format-detection" />
+		<title>filter</title>
+		<meta name="description" content="">
+		<meta name="keywords" content="">
+		<link rel="stylesheet" href="http://cdn.amazeui.org/amazeui/2.7.1/css/amazeui.min.css">
+	    <script src="http://cdn.bootcss.com/jquery/2.1.4/jquery.min.js"></script>
+	    <script src="http://cdn.bootcss.com/angular.js/1.3.0/angular.js"></script>
+	    <style>
+			body{padding: 30px;}
+			ul,li,ol{list-style: none;}
+			p{margin: 0}
+	    </style>
+	</head>
+<body class="am-container">
+	<div ng-controller="myform">
+		<ul>
+			<li ng-repeat="item in prolist">
+				<h3 ng-bind="item.name"></h3>
+				<p>价格：<span>{{item.price}}</span></p>
+			</li>
+		</ul>
+		<p>产品总价: {{total}}</p>
+	</div>
+
+
+    <script>
+    var myform = angular.module('myApp', []);
+    myform.controller('myform', function($scope){
+    	$scope.prolist = [{
+    		name: '产品1',
+    		price: '28.35',
+    	},{
+    		name: '产品2',
+    		price: '16.35',
+    	},{
+    		name: '产品3',
+    		price: '35.35',
+    	},{
+    		name: '产品4',
+    		price: '67.00',
+    	}];
+    	
+    	$scope.total = (function(){
+    		var total = 0;
+    		for (var i = 0; i < $scope.prolist.length; i++) {
+    			total += parseFloat($scope.prolist[i].price);
+    		}
+    		return total;
+    	})();
+    });
+    myform.filter('formatMobile', function(){
+    	return function(mobile, attr){
+    		if (attr === 'star') {
+    			mobile = mobile.substr(0,3) + '****' + mobile.substr(7,4);
+    		}else{
+    			mobile = mobile.substr(0,3) + ' ' + mobile.substr(3,4) + ' ' + mobile.substr(7,4);
+    		}
+			return mobile    		
+    	}
+    });
+   
+    </script>
+</body>
+</html>

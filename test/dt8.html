@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width,initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no" />
+	    <meta content="telephone=no" name="format-detection" />
+		<title>$location服务</title>
+		<link rel="stylesheet" type="text/css" href="http://cdn.amazeui.org/amazeui/2.7.2/css/amazeui.min.css"/>
+		<link rel="stylesheet" href="http://wap.nx.10086.cn/css/nxapp.css" />
+		
+		<script src="/static/js/jquery-1.9.1.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="https://cdn.static.runoob.com/libs/angular.js/1.4.6/angular.min.js"></script>
+		
+	</head>
+<body>
+    <div class="container" ng-controller="myCtrl">
+    	<a ng-href="test2.html?tel=123456">通讯录</a>
+    	{{myUrl}}
+    </div>
+
+    <script type="text/javascript">
+    	// $location 服务，它可以返回当前页面的 URL 地址。
+    	var mymodule = angular.module("myApp", []);
+    	mymodule.controller("myCtrl", function($scope, $location){
+			$scope.myUrl = $location.absUrl();
+			
+			$location.path();
+			$location.path("/test2.html");
+			console.log($location.path());
+    	});
+    	
+//		也可以写成这样，用数组引入依赖注入。(如果只用了NG默认的服务，不需要这么依赖注入，但是如果有自己的service，就必须写)
+//  	mymodule.controller("myCtrl",['$scope','$location', function($scope, $location){
+//			$scope.myUrl = $location.absUrl();
+//  	}]);
+
+    </script>
+</body>
+</html>

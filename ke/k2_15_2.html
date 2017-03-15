@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en" ng-app="service1">
+<head>
+	<meta charset="UTF-8">
+	<title>http 服务</title>
+	<link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.4/css/bootstrap.min.css">
+	<script src="/static/js/angular.js"></script>
+</head>
+	<body>
+		<ul ng-controller="myCtrl">
+			<li ng-repeat="item in itemList" ng-bind="item.name"></li>
+		</ul>
+		
+		<script type="text/javascript">
+			var myModule = angular.module('service1', []);
+			myModule.controller('myCtrl',['$scope', '$http', 'bookListService', function($scope, $http, bookListService){
+				if (bookListService) {
+					var queryData = bookListService.queryData();
+					queryData.then(function(res){
+						$scope.itemList = res.data;
+					}, function(res){
+						console.log('err');
+					});
+				}else{
+					console.log('出错')
+				}
+			}]);
+			
+			myModule.service('bookListService', function($http, $q){
+				
+				this.queryData = function(){
+					var defer = $q.defer();
+					var promise = defer.promise;
+					
+					// 请求列表
+					$http({
+						method: 'get',
+						url: 'data.json'
+					}).then(function successCallback(data, status, header, config){
+						console.log('1111111111111111111');
+						console.log(data);
+						defer.resolve(data);
+					},function errorCallback(data, status, header, config){
+						defer.reject('error')
+					});
+					return promise;
+				}
+			})
+		</script>
+	</body>
+</html>

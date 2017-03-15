@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en" ng-app="service1">
+<head>
+	<meta charset="UTF-8">
+	<title>http 服务</title>
+	<link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.4/css/bootstrap.min.css">
+	<script src="/static/js/angular.js"></script>
+</head>
+<body>
+	<div ng-controller="myCtrl" class="container">
+		<ul>
+			<li ng-repeat="item in itemlist">
+				{{item.name}}
+			</li>
+		</ul>
+	</div>
+	
+	<!--
+	<script src="controller/service1.js"></script>
+	-->
+	<script type="text/javascript">
+		var mymodule=angular.module('service1',[]);
+		mymodule.controller('myCtrl',['$scope','$http',function($scope,$http){
+			$http({
+				method: 'get',
+				url: 'data.json'
+			}).success(function(data, status, header, config){
+				console.log(data);
+				console.log('status: '+status);
+				console.log('header: '+header);
+				console.log(config);
+				$scope.itemlist = data;
+			}).error(function(data, status, header, config){
+				console.log('error')
+			});
+			
+			/**
+			 * 同上一种写法，参数变为一个对象
+			 * {data: **, status: 200, header: **, config: **}
+			 * **/
+			$http({
+				method: 'get',
+				url: 'data.json'
+			}).then(function successCallback(res){
+				console.log(res.data);
+				$scope.itemlist = res.data;
+			},function errorCallback(res){
+				console.log('err');
+			})
+		
+		}]);
+	</script>
+</body>
+</html>

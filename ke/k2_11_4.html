@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="mymodule">
+<head>
+    <meta charset="UTF-8">
+    <title>scope &符号绑定</title>
+    <link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.4/css/bootstrap.min.css">
+    <script src="/static/js/angular.js"></script>
+</head>
+<body>
+    <div class="container">
+        <p class="lead">
+            & 用于传递一个来自父层scope的函数
+        </p>
+        <div ng-controller="MyCtrl">
+            <p>
+            <greeting greet="sayHello(name)"></greeting>
+            </p>
+            <p>
+            <greeting greet="sayHello(name)"></greeting>
+            </p>
+            <p>
+            <greeting greet="sayHello(name)"></greeting>
+            </p>
+        </div>
+    </div>
+    
+    <!--
+    <script src="directive/dt9.js"></script>
+    -->
+    
+    <script type="text/javascript">
+    	var mymodule=angular.module('mymodule',[]);
+		mymodule.controller('MyCtrl',['$scope',function($scope){
+		    $scope.sayHello=function(name){
+		        alert('hello '+name);
+		    };
+		}]);
+		
+		mymodule.directive('greeting',function(){
+		    return {
+		        restrict:'AE',
+		        scope:{
+		            greet:'&'
+		        },
+		        template:'<input type="text" ng-model="username" /><br/>'+' <button type="button" class="btn btn-primary" ng-click="greet({name:username})">确定</button><br/>'
+		    }
+		    
+		});
+    </script>
+</body>
+</html>

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="classC">
+<head>
+    <meta charset="UTF-8">
+    <title>class 切换</title>
+    <link rel="stylesheet" href="/static/css/bootstrap.min.css">
+    <script src="/static/js/jquery-1.9.1.min.js"></script>
+    <script src="/static/js/angular.js"></script>
+    <style>
+        .text-red{background: #f00;}
+        .text-green{background: #66ff33;}
+    </style>
+</head>
+<body>
+    <div ng-controller="cssCtrl" >
+        <div class="text-{{color}}">这是什么颜色</div>
+        <button type="button" ng-click="changeColor()">绿色</button>
+    </div>
+    
+    <script src="controller/k2_5_6.js"></script>
+</body>
+</html>

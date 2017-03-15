@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html ng-app="mymodule">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<title>ngAnimate 返回顶部</title>
+		<!--<script src="http://cdn.bootcss.com/jquery/2.1.4/jquery.js"></script>-->
+		<script src="/static/js/angular.js"></script>
+		<script src="/angular-1.2.2/angular-animate.min.js" type="text/javascript" charset="utf-8"></script>
+		<style>
+			.box-one {
+			  -webkit-transition:all linear 0.5s;
+			  transition:all linear 0.5s;
+			}
+			.box-one.ng-hide {
+			  opacity:0;
+			}
+		</style>
+	</head>
+<body>
+    <div class="myController" ng-controller="myController">
+		
+		<div ng-if="onOff" class="fold-animation">
+		  This element will go BOOM
+		</div>
+		<button ng-click="exchangeOnoff()">Fold In</button>
+		
+    </div>
+	
+	<script type="text/javascript">
+		var mymodule=angular.module('mymodule',[]);
+
+		mymodule.controller('myController',['$scope',function($scope){
+			$scope.onOff = false;
+			$scope.exchangeOnoff = function() {
+				$scope.onOff = !$scope.onOff;
+			}
+			
+			// 动画
+			mymodule.animation('.fold-animation', ['$animateCss', function($animateCss) {
+			  return {
+			    enter: function(element, doneFn) {
+			      var height = element[0].offsetHeight;
+			      return $animateCss(element, {
+			        from: { height:'0px' },
+			        to: { height:30 + 'px' },
+			        duration: 1 // one second
+			      });
+			    }
+			  }
+			}]);
+		    
+		}]);
+	</script>
+</body>
+</html>

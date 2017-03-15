@@ -1,0 +1,25 @@
+var userShuang=angular.module('userShuang',[]);
+userShuang.controller('userCtrl',['$scope',function($scope){
+    $scope.userInfo={
+        email:"123@qq.com",
+        pwd:"123456",
+        chk:true
+    };
+    $scope.getFormData=function(){
+        console.log($scope.userInfo);
+    };
+    $scope.setFormData=function(){
+        $scope.userInfo={
+            email:'456789@163.com',
+            pwd:'89518746',
+            chk:false
+        };
+    };
+    $scope.resetFormData=function(){
+        $scope.userInfo={
+            email:"123@qq.com",
+            pwd:"123456",
+            chk:true
+        };
+    };
+}])

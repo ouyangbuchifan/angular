@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="mymodule">
+<head>
+    <meta charset="UTF-8">
+    <title>指令与控制器交互 </title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width">
+    <script src="/static/js/angular.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h1>指令的复用</h1>
+    
+        <div ng-controller="myCtrl1">
+            <loader howToLoad="loadData()">滑动加载</loader>
+        </div>
+        <div ng-controller="myCtrl2">
+            <loader howToLoad="loadData2()">滑动加载</loader>
+        </div>
+    
+    </div>
+    
+    
+    <!-- 
+        <script src="directive/dt4.js"></script>
+     -->
+    <script>
+        var myModule=angular.module('mymodule',[]);
+
+        myModule.controller('myCtrl1',['$scope',function($scope){
+            $scope.loadData=function(){
+                console.log('加载数据中...');
+            }
+        }]);
+        //如果有两个控制器里都用到这个指令
+        myModule.controller('myCtrl2',['$scope',function($scope){
+            $scope.loadData2=function(){
+                console.log('加载数据中222...');
+            }
+        }]);
+
+        myModule.directive('loader',function(){
+            return {
+                restrict:'AE',
+                
+                // element是指令元素，事件用on(bind)绑定上来
+                link:function(scope,element,attr){  
+                    element.bind('mouseenter',function(){
+                        // scope.loadData();
+                        scope.$apply(attr.howtoload);
+                    });
+                }
+            }
+        });
+    </script>
+</body>
+</html>

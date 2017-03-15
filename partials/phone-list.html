@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" ng-app>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <link rel="stylesheet" href="/static/css/bootstrap.min.css">
+    <script src="/static/js/angular.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/controllers.js"></script>
+</head>
+
+<body ng-controller="PhoneListCtrl">
+    <div class="container-fluid">
+        <div class="row-fluid">
+            <div class="col-xs-2">
+                <!--Sidebar content-->
+
+                Search:
+                <input ng-model="query">Sort by:
+                <select ng-model="orderProp">
+                    <option value="name">Alphabetical</option>
+                    <option value="age">Newest</option>
+                </select>
+
+            </div>
+            <div class="col-xs-10">
+                <!--Body content-->
+
+                <ul class="phones">
+                    <li ng-repeat="phone in phones | filter:query | orderBy:orderProp" class="thumbnail">
+                        <a href="/partials/{{phone.id}}" class="thumb">
+                            <img ng-src="{{phone.imageUrl}}">
+                        </a>
+                        <a href="/partials/{{phone.id}}">{{phone.name}}</a>
+                        <p>{{phone.snippet}}</p>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

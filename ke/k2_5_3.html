@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="userShuang">
+<head>
+    <meta charset="UTF-8">
+    <title>ngClass 双向数据绑定</title>
+    <link rel="stylesheet" href="/static/css/bootstrap.min.css">
+    <script src="/static/js/jquery-1.9.1.min.js"></script>
+    <script src="/static/js/angular.js"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h3 class="panel-title">双向数据绑定</h3>
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-sm-12 col-md-12">
+                        <form class="form-horizontal" role="form" ng-controller="userCtrl">
+                            <div class="form-group">
+                                <label class="control-label col-md-2">email:</label>
+                                <div class="col-md-10">
+                                    <input type="email" class="form-control" name="email" placeholder="推荐使用163邮箱" ng-model="userInfo.email">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-2">密码：</label>
+                                <div class="col-md-10">
+                                    <input type="password" name="pwd" class="form-control" placeholder="只能是数字，字母，下划线" ng-model="userInfo.pwd">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-10 col-md-offset-2">
+                                    <div class="checkbox">
+                                        <label>
+                                            <input type="checkbox" name="" id="" ng-model="userInfo.chk"> 自动登录
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-offset-2 col-md-10">
+                                    <button class="btn btn-primary" ng-click="getFormData()">获取值</button>
+                                    <button class="btn btn-primary" ng-click="setFormData()">赋值</button>
+                                    <button class="btn btn-primary" ng-click="resetFormData()">重置值</button>
+                                </div>
+                            </div>
+                            
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    
+    <script>
+    	var userShuang=angular.module('userShuang',[]);
+		userShuang.controller('userCtrl',['$scope',function($scope){
+		    $scope.userInfo={
+		        email:"123@qq.com",
+		        pwd:"123456",
+		        chk:true
+		    };
+		    $scope.getFormData=function(){
+		        console.log($scope.userInfo);
+		    };
+		    $scope.setFormData=function(){
+		        $scope.userInfo={
+		            email:'456789@163.com',
+		            pwd:'89518746',
+		            chk:false
+		        };
+		    };
+		    $scope.resetFormData=function(){
+		        $scope.userInfo={
+		            email:"123@qq.com",
+		            pwd:"123456",
+		            chk:true
+		        };
+		    };
+		}])
+    </script>
+</body>
+</html>

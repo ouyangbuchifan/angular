@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" ng-app>
+<head>
+    <meta charset="UTF-8">
+    <title>视图</title>
+
+    
+</head>
+<body>
+    <!--ng里视图通过指令来实现，比如ng-model  这个例子不需要控制器，只用代码就实现了视图-->
+    <div>
+        <input type="text" ng-model="greeting.text">
+        <p><span ng-bind="greeting.text"></span>,angular</p>
+    </div>
+    
+    
+    <!--
+        所有内容都基于$scope对象，控制器里
+        $scope是个JS对象
+        $scope提供了一些工具方法 $watch() $apply()
+        $scope是表达式的执行环境，即作用域
+        $scope是一个树型结构，与DOM标签平行
+        子$scope对象会继承父级$scope上的属性和方法
+        每个ng对象都只有一个根$scope对象，一般位于ng-app上
+        $scope可以传播事件，类似DOM事件，可向上或向下
+        $scope不仅是MVC基础，也是双向数据绑定基础    
+        可以用angular.element($0).scope()进行调试
+    -->
+    <script src="/static/js/angular.js"></script>
+</body>
+</html>

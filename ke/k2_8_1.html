@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="directive1">
+<head>
+    <meta charset="UTF-8">
+    <title>指令1</title>
+    <link rel="stylesheet" href="/static/css/bootstrap.min.css">
+    <script src="/static/js/jquery-1.9.1.min.js"></script>
+    <script src="/static/js/angular.js"></script>
+</head>
+<body>
+    <p>
+        指令的4种写法，推荐前两种
+    </p>
+    
+    <hello></hello>
+    
+    <div hello></div>
+    
+    <div class="hello"></div>
+    
+    <!-- directive:hello -->
+    
+    
+    <hr>
+    <p>最后一种，空格不能省</p>
+    
+    <!--  
+    <script src="directive/directive1.js"></script>
+    -->
+
+    <script>
+    var myModule = angular.module("MyModule", []);
+
+    myModule.directive("hello", function() {
+        return {
+            restrict: 'AEMC',
+            // template:'<h1>被包含</h1>',
+            templateUrl: 'k2_8_text.html',
+            
+            // 如果有replace，连带指令那个元素也会被替换掉。所以模板里必须得有一个父元素，不能几个元素共写
+            replace: true
+        }
+    });
+    </script>
+</body>
+</html>

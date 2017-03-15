@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html ng-app="myapp">
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css">
+</head>
+<body>
+
+
+
+<div ng-controller="myCtrl" class="container">
+    <div class="btn btn-primary" ng-click="codeFun()">按钮</div>
+    <div class="modal-bg" ng-show="code"></div>
+    <div class="code_wp" ng-model="code" id="code" ng-show="code">
+    	{{txt}}
+    </div>
+</div>
+
+
+
+<script src="../static/js/requirejs/require.js" data-main="js/main" ></script>
+<script>
+	require(["../static/js/jquery-1.9.1.min.js", "js/jquery.qrcode.min.js"],function(){
+		$("body").css("background","#ccc");
+		$("#code").qrcode({
+			render : "canvas",    
+		    text : 'http://www.baidu.com',    
+		    width : 120,             
+		    height : 120,
+		    background : "#ffffff",       
+		    foreground : "#000000"        
+		});
+	})
+</script>
+</body>
+</html>

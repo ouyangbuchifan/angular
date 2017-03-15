@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<title>ng1.3-表单验证3</title>
+		<meta name="description" content="">
+		<meta name="keywords" content="">
+		<link rel="stylesheet" href="/static/css/bootstrap.min.css">
+	    <script src="/static/js/jquery-1.9.1.min.js"></script>
+	    <script src="/static/js/angular.js"></script>
+	    <style>
+			body{padding: 30px;}
+	    </style>
+	</head>
+<body class="container">
+	<div class="col-md-12" ng-controller="myform">
+        <form role="form" name="pwdChange" ng-submit="submitForm(pwdChange.$valid)" class="form-horizontal">
+            <div class="form-group  has-feedback">
+                <label for="pwd" class="col-md-1 control-label">原始密码</label>
+                <div class="col-md-10">
+                    <input class="form-control" name="pwd" type="text" required ng-model='user.pwd' />
+                    <span class="glyphicon glyphicon-ok form-control-feedback"
+                          ng-show="pwdChange.pwd.$dirty && pwdChange.pwd.$valid"></span>
+                </div>
+            </div>
+            <div class="form-group has-feedback">
+        		<label for="newpwd" class="col-md-1 control-label">新密码</label>
+        		<div class="col-md-10">
+        			<input type="password" class="form-control" name="newpwd" required ng-model="user.newpwd" ng-pattern="/^\d+$/" ng-minlength="6" placeholder="请输入6位数字">
+        			<span class="glyphicon glyphicon-ok form-control-feedback" ng-show="pwdChange.newpwd.$dirty && pwdChange.newpwd.$valid"></span>
+        		</div>
+            </div>
+            <div class="form-group has-feedback">
+            	<label for="newpwd2" class="col-md-1 control-label">新密码</label>
+            	<div class="col-md-10">
+            		<input type="password" class="form-control" name="newpwd2" required ng-model="user.newpwd2" ng-pattern="/^\d{6}$/" placeholder="请重复密码">
+            		<span class="glyphicon glyphicon-ok form-control-feedback" ng-show="pwdChange.newpwd2.$dirty && pwdChange.newpwd2.$valid"></span>
+            	</div>
+            </div>
+            <div class="form-group text-center">
+                <input class="btn btn-primary btn-block" ng-disabled="pwdChange.$invalid" type="submit" value="提交" />
+            </div>
+        </form>       
+    </div>
+
+
+    <script>
+    var myform = angular.module('myApp', []);
+    myform.controller('myform', function($scope){
+    	// $scope.user={
+    	// 	newpwd:'',
+    	// 	newpwd2:'',
+    	// }
+    	$scope.submitForm=function(isValid){
+    		if($scope.user.newpwd2==$scope.user.newpwd){
+    			console.log('验证通过');
+    			return true;
+    		}else{
+    			console.log('未通过');
+    			return false;
+    		}
+    	}
+        
+    })
+    </script>
+</body>
+</html>

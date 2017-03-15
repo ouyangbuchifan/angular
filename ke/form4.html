@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<title>ng1.3-表单验证3</title>
+		<meta name="description" content="">
+		<meta name="keywords" content="">
+		<link rel="stylesheet" href="http://cdn.amazeui.org/amazeui/2.7.1/css/amazeui.min.css">
+	    <script src="/static/js/jquery-1.9.1.min.js"></script>
+	    <script src="/static/js/angular.js"></script>
+	    <style>
+			body{padding: 30px;}
+			.am-icon-calendar{
+				position: absolute;
+				right: 0;
+				bottom: 3px;
+			}
+	    </style>
+	</head>
+<body class="am-container">
+	<form action="submitForm(myForm.$valid)" name="myForm" class="am-form" ng-controller="myform">
+		<div class="am-form-group pr">
+		    <label class="am-form-label" >手机号：</label>
+		    <input type="text" name="tel" ng-model="user.tel" class="am-form-field" required ng-pattern="/^1[3-9]\d{9}$/" >
+		    <i class="am-icon-calendar" ng-show="myForm.tel.$dirty && myForm.tel.$invalid" ng-click="clearInput()"></i>
+	  	</div>
+	  	<div class="am-form-group">
+	  		<button type="submit" class="am-btn am-btn-primary">提交</button>
+	  	</div>
+	</form>
+
+
+    <script>
+    var myform = angular.module('myApp', []);
+    myform.controller('myform', function($scope){
+    	$scope.submitForm = function(isValid) {
+            if (!isValid) {
+                alert('验证失败');
+            }
+        };
+        $scope.clearInput = function(){
+        	$scope.user.tel = "";
+        }
+    })
+    </script>
+</body>
+</html>

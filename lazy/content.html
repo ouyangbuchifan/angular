@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html ng-app="sample-app" class="js">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>NG懒加载测试 详情页</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+	<style>
+		*{margin: 0;padding: 0;}
+		ul{
+			overflow: hidden;
+			list-style: none;
+		}
+		li{
+			float: left;
+			width: 50%;
+			height: 300px;
+			text-align: center;
+			list-style: none;
+		}
+	</style>
+    
+</head>
+<body ng-controller="appCtrl" >
+	<div class="conteont" afkl-lazy-image="contentImg">
+		
+	</div>
+
+<script src="/static/js/angular.js"></script>
+<script src="static/lazy-image.js"></script>
+<script src="static/app.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="mymodule">
+<head>
+    <meta charset="UTF-8">
+    <title>scope  @绑定</title>
+    <link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.4/css/bootstrap.min.css">
+    <script src="/static/js/angular.js"></script>
+</head>
+<body>
+    <div class="container" ng-controller="myCtrl">
+        <drink flavor="{{ctrlFlavor}}"></drink>
+        
+        <hr>
+        <p class="lead">scope 的绑定策略</p>
+        <ul>
+            <li>
+                @  当前属性的值作为字符串传递
+            </li>
+            <li>
+                =  与父scope属性进行双向绑定
+            </li>
+            <li>
+                &  传递一个来自父scope的函数，稍后调用
+            </li>
+        </ul>
+    </div>
+    
+    <script src="directive/dt7.js"></script>
+</body>
+</html>

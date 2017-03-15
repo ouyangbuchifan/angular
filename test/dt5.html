@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html ng-app="mymodule">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<meta name="format-detection" content="telephone=no, email=no">
+		<title>简化手风琴</title>
+		<link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css">
+		<script src="http://cdn.bootcss.com/jquery/2.1.4/jquery.js"></script>
+		<script src="/static/js/angular.js"></script>
+
+	</head>
+<body>
+<div class="container" ng-controller="myCtrl">
+	<div class="panel">
+		<div class="panel-heading" ng-click="show1 = !show1">我的标题</div>
+		<div class="panel-body" ng-show="show1">
+			我的内容
+		</div>
+	</div>
+	<div class="panel">
+		<div class="panel-heading btn btn-primary" ng-click="show2 = !show2">我的标题</div>
+		<div class="panel-body" ng-show="show2">
+			我的内容
+		</div>
+	</div>
+</div>
+    
+<script>
+	angular.module("mymodule", []).controller("myCtrl",function($scope){
+
+	});
+</script>
+</body>
+</html>

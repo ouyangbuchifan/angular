@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html ng-app="mymodule">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<meta name="format-detection" content="telephone=no, email=no">
+		<title>返回顶部</title>
+		<meta name="description" content="">
+		<meta name="keywords" content="">
+		<link href="" rel="stylesheet">
+		<script src="http://cdn.bootcss.com/jquery/2.1.4/jquery.js"></script>
+		<script src="/static/js/angular.js"></script>
+		<style>
+			/*CSS源代码*/
+			*{padding: 0;margin: 0;}
+			
+
+		</style>
+	</head>
+<body>
+<div class="wrap">
+    <div class="container my" ng-controller="myCtrl" id="container">
+    	<input type="text" ng-change="myFunc()" ng-model="myValue" />
+    	{{result}}
+    </div>
+</div>
+    
+<script>
+	angular.module("mymodule", []).controller("myCtrl", function($scope){
+		$scope.count = "";
+	    $scope.myFunc = function() {
+	        if ($scope.myValue.length == 11) {
+	        	$scope.result = "成功！"
+	        }else{
+	        	$scope.result = "";
+	        }
+	    };
+	});
+</script>
+</body>
+</html>

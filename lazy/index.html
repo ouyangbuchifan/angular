@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html ng-app="sample-app" class="js">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>NG懒加载测试 列表循环</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+	<style>
+		*{margin: 0;padding: 0;}
+		ul{
+			overflow: hidden;
+			list-style: none;
+		}
+		li{
+			float: left;
+			width: 50%;
+			height: 300px;
+			text-align: center;
+			list-style: none;
+		}
+	</style>
+    
+</head>
+<body ng-controller="appCtrl" >
+	<ul class="list">
+		<li ng-repeat="mobile in listMobile">
+			<span afkl-lazy-image="{{mobile.phoneImg}}" />
+		</li>
+	</ul>
+
+<script src="/static/js/angular.js"></script>
+<script src="static/lazy-image.js"></script>
+<script type="text/javascript">
+var sampleApp = angular.module("sample-app", ["afkl.lazyImage"]);
+sampleApp.controller("appCtrl", ["$scope", function($scope){
+	//	"use strict";
+	
+	$scope.listMobile = [{
+		"phoneImg": "http://wap.nx.10086.cn/service/uploads/001/001001/001001002/001001002002/p201503121022169603_list.jpg",
+	},{
+		"phoneImg": "http://wap.nx.10086.cn/service/uploads/001/001001/001001002/001001002057/p201509291613426097_list.jpg",
+	},{
+		"phoneImg": "http://wap.nx.10086.cn/service/uploads/001/001001/001001002/001001002079/p201602241613426100_list.jpg",
+	},{
+		"phoneImg": "http://wap.nx.10086.cn/service/uploads/001/001001/001001002/001001002080/p201602241613426101_list.jpg",
+	},{
+		"phoneImg": "http://wap.nx.10086.cn/service/uploads/001/001001/001001002/001001002077/p201602241613426098_list.jpg",
+	},{
+		"phoneImg": "http://wap.nx.10086.cn/service/uploads/001/001001/001001002/001001002076/p201602241613426097_list.jpg",
+	},{
+		"phoneImg": "http://wap.nx.10086.cn/service/uploads/001/001001/001001002/001001002078/p201602241613426099_list.jpg",
+	},{
+		"phoneImg": "http://wap.nx.10086.cn/service/uploads/001/001001/001001002/001001002002/p201503121022169603_list.jpg",
+	},{
+		"phoneImg": "http://wap.nx.10086.cn/service/uploads/001/001001/001001002/001001002009/p201503121026032021_list.jpg",
+	},{
+		"phoneImg": "http://wap.nx.10086.cn/service/uploads/001/001001/001001002/001001002040/p201506091631002134_list.jpg",
+	},{
+		"phoneImg": "http://wap.nx.10086.cn/service/uploads/001/001001/001001002/001001002075/p201602220919097118_list.jpg",
+	},{
+		"phoneImg": "http://wap.nx.10086.cn/service/uploads/001/001001/001001002/001001002074/p201602220904572452_list.jpg",
+	},{
+		"phoneImg": "http://wap.nx.10086.cn/service/uploads/001/001001/001001002/001001002082/p201603141636403168_list.jpg",
+	},{
+		"phoneImg": "http://wap.nx.10086.cn/service/uploads/001/001001/001001002/001001002092/p201604181826531926_list.jpg",
+	},{
+		"phoneImg": "http://wap.nx.10086.cn/service/uploads/001/001001/001001002/001001002090/p201603231845048261_list.jpg",
+	},{
+		"phoneImg": "http://wap.nx.10086.cn/service/uploads/001/001001/001001002/001001002065/p201512011539438841_list.jpg",
+	},{
+		"phoneImg": "http://wap.nx.10086.cn/service/uploads/001/001001/001001002/001001002046/p201510282000121572_list.jpg"
+	},{
+		"phoneImg": "http://wap.nx.10086.cn/service/uploads/001/001001/001001002/001001002086/p201603151611259393_list.jpg"
+	},{
+		"phoneImg": "http://wap.nx.10086.cn/service/uploads/001/001001/001001002/001001002085/p201603151610214723_list.jpg"
+	},{
+		"phoneImg": "http://wap.nx.10086.cn/service/uploads/001/001001/001001002/001001002087/p201603231701118378_list.jpg"
+	},{
+		"phoneImg": "http://wap.nx.10086.cn/service/uploads/001/001001/001001002/001001002088/p201603231702442586_list.jpg"
+	},{
+		"phoneImg": "http://wap.nx.10086.cn/service/uploads/001/001001/001001002/001001002091/p201604031802590622_list.jpg"
+	}];
+	
+	/*
+	 * 详情页内容
+	 * 正式环境一个模板对应一个控制器，这里为方便用一个。
+	 */
+	$scope.contentImg = "<img src='http://wap.nx.10086.cn/service/uploads/001/001001/001001002/001001002002/p201507091707249831.jpg'> <img src='http://wap.nx.10086.cn/service/uploads/001/001001/001001002/p201506251923424555.jpg'><img src='http://wap.nx.10086.cn/service/uploads/001/001001/001001002/001001002080/p201602241752037000.png'>";
+
+	
+	
+}]);
+
+
+</script>
+</body>
+</html>
