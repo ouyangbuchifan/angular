@@ -17,6 +17,21 @@
 
 	<!-- 注：这两种方式都可以显示。区别：如果浏览器加载页面过慢，第一种方式，用户有可能看到{{mytext.sometext}}原本内容，两个花括号及里面的内容。第二种方式缺点是没有第一种简单 -->
 
-<script type="text/javascript" src="static/js/b04.js"></script>
+<!--<script type="text/javascript" src="static/js/b04.js"></script>-->
+<script type="text/javascript">
+	var anb04=angular.module('myapp_04',[]);
+	anb04.controller('b04',function($scope){
+	//	var mytext={};
+	//	mytext.sometext='你好，今天是周三';
+	//	$scope.mytext=mytext;
+	    
+	    
+	    // 或者这么写
+	    mytext={
+	        sometext:"你好，今天是周三",
+	    };
+	    $scope.mytext=mytext;
+	})
+</script>
 </body>
 </html>

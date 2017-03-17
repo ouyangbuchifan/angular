@@ -7,9 +7,24 @@
 </head>
 <body>
     <hello>
-        <div>这是内部的内容</div>
+        <span>这是内部的内容</span>
     </hello>
     
+    <!--
     <script src="directive/dt3.js"></script>
+    -->
+    
+    <script type="text/javascript">
+    	var myModule=angular.module('mymodule',[]);
+		myModule.directive('hello',function(){
+		    return {
+		        restrict: 'AE',
+		        template: '<div>hello,everyone <span ng-transclude></span> </div>',
+		        // 很重要，指令之间可以嵌套指令。ng-transclude是指令内的内容
+		        transclude: true,
+		        replace: true
+		    }
+		});
+    </script>
 </body>
 </html>

@@ -12,7 +12,7 @@
 <body>
     
     <div ng-controller="myCtrl" class="container">
-    	<form action="" class="form" name="myform" ng-submit="save()">
+    	<form class="form" name="myform" ng-submit="save()">
     		<div class="form-group">
     			<div class="col-sm-4">
     				<input type="text" name="userName" ng-model="user.userName" required>
@@ -21,7 +21,7 @@
     				<input type="password" name="pwd" ng-model="user.pwd" required>
     			</div>
     			<div class="col-sm-4">
-    				<input type="submit" ng-disabled="myform.$invalid">
+    				<input type="submit" ng-disabled="myform.$invalid" class="btn btn-primary">
     			</div>
     		</div>
     	</form>

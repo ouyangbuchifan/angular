@@ -31,6 +31,28 @@
 	<hr>
 <!--	<div>{{xie||"未查询到":"MB"}}</div>-->
 
-<script type="text/javascript" src="static/js/book.js"></script>
+<!--<script type="text/javascript" src="static/js/book.js"></script>-->
+
+<script type="text/javascript">
+	function book ($scope) {
+		$scope.items=[{
+			title:'Paint posts',
+			quantity:8,
+			price:3.95
+		},{
+			title:'Polka',
+			quantity:17,
+			price:12.95
+		},{
+			title:'Pebbles',
+			quantity:5,
+			price:6.95
+		}];
+		$scope.remove=function(index){
+			$scope.items.splice(index,1);		// 注意这个方法 splice()
+		};
+	}
+
+</script>
 </body>
 </html>

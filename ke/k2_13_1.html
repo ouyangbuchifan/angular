@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width,initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no" />
+	    <meta content="telephone=no" name="format-detection" />
+		<title>手风琴指令</title>
+		<link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.4/css/bootstrap.min.css">
+    	<script src="/static/js/angular.js"></script>
+    	<style>
+    		.panel-heading{cursor: pointer;}
+    	</style>
+	</head>
+<body>
+    <div class="container" ng-controller="myCtrl">
+    	<expander class="expander" expander-title="title">
+    		{{text}}
+    	</expander>
+    	
+    	<expander class="expander" expander-title="title2">
+    		怎么办理4G业务
+    	</expander>
+    </div>
+    
+    <script type="text/javascript">
+    	var myModule = angular.module('myApp', []);
+    	myModule.controller('myCtrl', function($scope){
+    		$scope.title = '点击展开';
+    		$scope.title2 = '帮助中心';
+    		$scope.text = '这里是内容';
+    	});
+    	myModule.directive('expander', function(){
+    		return {
+    			restrict: 'EA',
+    			replace: true,
+    			transclude: true,
+    			/*
+    			 * = 与父scope(模板的控制器$scope)进行双向绑定 
+    			 * @ 把属性的值作为字符串传递
+    			 * */
+    			scope: {
+    				title: '=expanderTitle',
+//  				title: '@expanderTitle',
+    			},
+    			templateUrl: 'k2_13_1_text.html',
+    			link: function(scope, element, attrs, controller){
+    				scope.showMe = false;
+    				scope.toggle = function(){
+    					scope.showMe = !scope.showMe;
+    				};
+    			}
+    		}
+    	});
+    </script>
+</body>
+</html>

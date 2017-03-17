@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width,initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no" />
+	    <meta content="telephone=no" name="format-detection" />
+		<title>自定义可更改DOM</title>
+		<meta name="description" content="">
+		<meta name="keywords" content="">
+		<link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.4/css/bootstrap.min.css">
+    	<script src="/static/js/angular.js"></script>
+	</head>
+<body>
+    <div class="container">
+    	<div contenteditable="true" ng-model="mycontent" title="click to edit" class="bg-success">some</div>
+    	<pre>model = {{mycontent}}</pre>
+    </div>
+    
+    <script type="text/javascript">
+    	var myModule = angular.module('myApp', []);
+    	myModule.directive('contenteditable', function(){
+    		return {
+    			require: 'ngModel',
+    			link: function(scope, element, attr, controller){
+    				// view -> model
+					elm.bind('keyup', function() {
+						scope.$apply(function() {
+							ctrl.$setViewValue(elm.text());
+						});
+					});
+		
+					// model -> view
+					ctrl.$render = function() {
+						elm.html(ctrl.$viewValue);
+					};
+		
+					// load init value from DOM
+					ctrl.$setViewValue(elm.html());
+    			}
+    		}
+    	})
+    </script>
+</body>
+</html>

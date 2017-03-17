@@ -17,7 +17,7 @@
 		var myModule=angular.module('dt2',[]);
 
 		//注入器加载完所有模块时，此方法执行一次
-		myModule.run(function($templateCache){
+		myModule.run(function($templateCache){	
 			$templateCache.put("hello.html","<div>Hello everyone!!!!!!</div>");
 		});
 		myModule.directive("hello", function($templateCache) {

@@ -44,9 +44,10 @@
                 restrict:'AE',
                 
                 // element是指令元素，事件用on(bind)绑定上来
+                // attr 指令的属性
                 link:function(scope,element,attr){  
                     element.bind('mouseenter',function(){
-                        // scope.loadData();
+//                     	scope.loadData();
                         scope.$apply(attr.howtoload);
                     });
                 }

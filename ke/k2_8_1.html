@@ -19,6 +19,8 @@
     <div class="hello"></div>
     
     <!-- directive:hello -->
+    <div></div>
+    
     
     
     <hr>
@@ -29,14 +31,12 @@
     -->
 
     <script>
-    var myModule = angular.module("MyModule", []);
+    var myModule = angular.module("directive1", []);
 
     myModule.directive("hello", function() {
         return {
             restrict: 'AEMC',
-            // template:'<h1>被包含</h1>',
-            templateUrl: 'k2_8_text.html',
-            
+           	template:'<h1>hello, everyone!</h1>',
             // 如果有replace，连带指令那个元素也会被替换掉。所以模板里必须得有一个父元素，不能几个元素共写
             replace: true
         }

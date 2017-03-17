@@ -16,6 +16,16 @@
     <p>{{message.text0}}</p>
 
 
-<script type="text/javascript" src="static/js/book.js"></script>
+<!--<script type="text/javascript" src="static/js/book.js"></script>-->
+
+<script type="text/javascript">
+	// b02.html
+var message={};	// 创建一个模型对象
+message.text0="这是新的写法，推荐这样";
+function book2($scope){
+	$scope.text0="这是旧的写法，不推荐";
+	$scope.message=message;	//页面里的message,即$scope.message 替换为message对象，这样message.text0就对应上面定义的内容
+}
+</script>
 </body>
 </html>
