@@ -11,18 +11,81 @@
 	</head>
 <body>
     <div class="container" ng-controller="myCtrl">
-    	<accordion>
+    	<!--<accordion>
     		<expander class="expander" ne-repeat="expander in expanders" expander-title="expander.title">
     			{{expander.text}}
     		</expander>
-    	</accordion>
+    	</accordion>-->
+    	
+    	<accordion>
+			<expander class='expander' ng-repeat='expander in expanders' expander-title='expander.title'>
+				{{expander.text}}
+			</expander>
+		</accordion>
     </div>
     
     <script type="text/javascript">
     	var myModule = angular.module('myApp', []);
     	myModule.controller('myCtrl', function($scope){
-    		
+    		$scope.expanders = [{
+    			title: '怎么注册为宁夏移动用户?',
+    			text: '为方便用户更好的体验中国移动各项服务，中国移动统一认证服务支持用户使用邮箱帐号（互联网帐号）登录，提供用户的邮箱帐号（互联网帐号）注册功能；在使用邮箱注册一个互联网通行证后，即可使用互联网账户登录体验中国移动各项服务。'
+    		},{
+    			title: '如何购买合约机？',
+    			text: '您也可以在商城首页的广告位中挑选喜爱的合约机'
+    		},{
+    			title: '支付方式有哪些？',
+    			text: '支持银联支付，信用卡，及主流移动支付'
+    		}];
     	});
+    	
+    	// 父级
+    	myModule.directive('accordion', function(){
+    		return{
+    			restrict: 'EA',
+    			replace: true,
+    			transclude: true,
+    			template: '<div ng-transclude></div>',
+    			controller: function(){
+    				var expanders = [];
+    				this.gotOpened = function(selectedExpander){
+    					angular.forEach(expanders, function(expander){
+    						if (selectedExpander != expander) {
+    							expander.showMe = false;
+    						}
+    					})
+    				};
+    				this.addExpander = function(expander){
+    					expanders.push(expander);
+    				}
+    			}
+    		}
+    	});
+    	
+    	// 子级
+    	myModule.directive('expander', function(){
+    		return {
+    			restrict: 'EA',
+	    		replace: true,
+	    		transclude: true,
+	    		require: '^?accordion',
+	    		scope: {
+	    			title: '=expanderTitle'
+	    		},
+	    		template: '<div class="panel panel-primary">'
+	    			+ '<div class="panel-heading" ng-click="toggle()">{{title}}</div>'
+	    			+ '<div class="panel-body" ng-show="showMe" ng-transclude></div>'
+	    			+ '</div>',
+	    		link: function(scope, element, attr, controller){
+	    			scope.showMe = false;
+	    			controller.addExpander(scope);
+	    			scope.toggle = function toggle(){
+	    				scope.showMe = !scope.showMe;
+	    				controller.gotOpened(scope);
+	    			}
+	    		}
+    		}
+    	})
     </script>
 </body>
 </html>
