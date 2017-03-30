@@ -12,14 +12,15 @@
 			body{padding: 30px;}
 			ul,li,ol{list-style: none;}
 			p{margin: 0}
+			.panel-heading{cursor: pointer}
+			.panel-body{font-size: 12px;line-height: 1.8;color: #666;}
 	    </style>
 	</head>
-<body class="am-container">
+<body class="am-g">
 	<div ng-controller="myform">
-		<ul>
-			<li ng-repeat="item in prolist" panelList panelList-title="name">
-			</li>
-		</ul>
+		<expander title="expander.title" ind="$index" ng-repeat="expander in prolist">
+			{{expander.content}}
+		</expander>
 	</div>
 
 
@@ -27,25 +28,42 @@
     var myform = angular.module('myApp', []);
     myform.controller('myform', function($scope){
     	$scope.prolist = [{
-    		name: '产品1',
-    		price: '28.35',
+    		title: '如何记录selenium自动化测试过程中接口的调用信息',
+    		content: '上一篇博客，我写了python自动化框架的一些知识和粗浅的看法，在上一篇中我也给自己提出一个需求：如果记录在测试过程中接口的调用情况？提出这个需求，我觉得是有意义的。你在测试过程中肯定会遇到一些莫名其妙的问题，比如：web某个页面一直在刷进度条，导致你定位元素失败，但是，你再手动操作一遍可能无法复现 ...',
     	},{
-    		name: '产品2',
-    		price: '16.35',
+    		title: '组织级项目管理中的常见问题及应对措施',
+    		content: '随着社会进步与发展，各行各业的信息化程度在逐年提高，信息系统建设呈现出大型化、社会化、全国化的趋势。这些大型系统在建设的过程中，不可避免地出现这样或那样的问题。建设方希望系统能够顺利执行，而承建方面临的压力更大，涉及人力资源、技术难点、项目管理等诸多方面。',
     	},{
-    		name: '产品3',
-    		price: '35.35',
+    		title: 'MCMC(二)马尔科夫链',
+    		content: 'MCMC(一)蒙特卡罗方法 MCMC(二)马尔科夫链 MCMC(三)M-H采样和Gibbs采样（待填坑） 在MCMC(一)蒙特卡罗方法中，我们讲到了如何用蒙特卡罗方法来随机模拟求解一些复杂的连续积分或者离散求和的方法，但是这个方法需要得到对应的概率分布的样本集，而想得到这样的样本集很困难。因此我们需',
     	},{
-    		name: '产品4',
-    		price: '67.00',
+    		title: '[.net 面向对象程序设计深入]（8）认识.NET Core',
+    		content: '主要介绍了.NET的三驾马车.NET Framework、.NET Core、Xamarin，.NET Framework是开发基于Windows平台的王者框架，而.NET Core的跨平台特性、开源及灵活的部署机制将是.NET的未来。后面介绍了.NET Core的组成、.NET Core主要功能模... ...',
     	}];
     	
     	
     });
-	myform.directive('penelList', function(){
+	myform.directive('expander', function(){
 		return {
 			restrict: 'EA',
-			template: '',
+			replace: true,
+			transclude: true,
+			scope: {
+				title: '=title',
+				ind: '=ind'
+			},
+			template: '<div class="panel panel-primary">'
+				+ '<div class="panel-heading" ng-click="toggle()">{{ind+1}}'
+				+ '. '
+				+ '{{title}}</div>'
+				+ '<div class="panel-body" ng-show="showme" ng-transclude></div>'
+				+ '</div>',
+			link: function(scope, element, attrs, controller){
+				scope.showme = false;
+				scope.toggle = function(){
+					scope.showme = !scope.showme;
+				}
+			}
 		}
 	});
    

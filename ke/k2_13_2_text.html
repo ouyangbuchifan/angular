@@ -1,0 +1,8 @@
+<div class="panel panel-primary">
+	<div class="panel-heading clearfix" ng-click="toggle()">
+		{{ind+1}}. {{title}}
+		<span class="icon pull-right" ng-show="!showMe">+</span>
+		<span class="icon pull-right" ng-show="showMe">-</span>
+	</div>
+	<div class="panel-body" ng-show="showMe" ng-transclude></div>
+</div>

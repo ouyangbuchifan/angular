@@ -17,7 +17,7 @@
                 <p class="pull-right" ng-click="toggleMenu()">显示与隐藏</p>
             </div>
             <ul class="panel-body" ng-show="tabMenu.show" ng-repeat="item in items">
-                <li><a href="{{item.url}}">{{item.name}}</a></li>
+                <li><a href="{{item.url}}">{{$index+1}}. {{item.name}}</a></li>
             </ul>
         </div>
     </div>

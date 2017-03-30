@@ -8,20 +8,22 @@
 		<title>手风琴指令2</title>
 		<link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.4/css/bootstrap.min.css">
     	<script src="/static/js/angular.js"></script>
+    	<style>
+    		.panel-heading{cursor: pointer;}
+    	</style>
 	</head>
 <body>
     <div class="container" ng-controller="myCtrl">
-    	<!--<accordion>
-    		<expander class="expander" ne-repeat="expander in expanders" expander-title="expander.title">
-    			{{expander.text}}
-    		</expander>
-    	</accordion>-->
+    	<div class="row">
+    		<div class="">
+    			<accordion>
+					<expander class='expander' ng-repeat='expander in expanders' expander-title='expander.title' expander-ind='$index'>
+						{{expander.text}}
+					</expander>
+				</accordion>
+    		</div>
+    	</div>
     	
-    	<accordion>
-			<expander class='expander' ng-repeat='expander in expanders' expander-title='expander.title'>
-				{{expander.text}}
-			</expander>
-		</accordion>
     </div>
     
     <script type="text/javascript">
@@ -70,12 +72,10 @@
 	    		transclude: true,
 	    		require: '^?accordion',
 	    		scope: {
-	    			title: '=expanderTitle'
+	    			title: '=expanderTitle',
+	    			ind: '=expanderInd'
 	    		},
-	    		template: '<div class="panel panel-primary">'
-	    			+ '<div class="panel-heading" ng-click="toggle()">{{title}}</div>'
-	    			+ '<div class="panel-body" ng-show="showMe" ng-transclude></div>'
-	    			+ '</div>',
+	    		templateUrl: 'k2_13_2_text.html',
 	    		link: function(scope, element, attr, controller){
 	    			scope.showMe = false;
 	    			controller.addExpander(scope);
