@@ -1,106 +1,35 @@
 <!DOCTYPE html>
-<html ng-app="myApp">
-	<head>
-		<meta charset="utf-8">
-		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-		<meta name="viewport" content="width=device-width,initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no" />
-	    <meta content="telephone=no" name="format-detection" />
-		<title>ngAnimate</title>
-		<link rel="stylesheet" type="text/css" href="../static/assets/css/amazeui.css"/>
-		<link rel="stylesheet" href="http://wap.nx.10086.cn/css/nxapp.css" />
-		
-		<script src="/bower_components/angular/angular.min.js" type="text/javascript" charset="utf-8"></script>
-		<script src="/angular-1.2.2/angular-animate.js" type="text/javascript" charset="utf-8"></script>
-		<style>
-			.am-g{margin-top: 20px;}
-			.demo {
-				position: relative;
-				left: 0;
-			  	animation: move linear 1s alternate infinite;
-				width: 100px;
-				height: 100px;
-				background: #f60;
-			}
-			@keyframes move{
-				from{
-					left: 0;
-				}
-				to{
-					left: 100px;
-				}
-			}
-			.modal{
-				position: absolute;
-				top: 100px;
-				left: 50%;
-				margin-left: -50px;
-				background: #f60;
-				width: 100px;
-				height: 100px;
-				transition: all .3s linear;
-				
-			}
-			.modal.on{
-				animation: fadeIn .3s linear;
-			}
-			.modal.ng-hide{
-				animation: fadeOut .3s linear;
-			}
-			@keyframes fadeIn{
-				from{
-					opacity: 0;
-				}
-				to{
-					opacity: 1;
-				}
-			}
-			@keyframes fadeOut{
-				from{
-					opacity: 1;
-				}
-				to{
-					opacity: 0;
-				}
-			}
-			
-			/*slideIn*/
-			.demo2{
-				margin-top: 20px;
-				transition: height .3s linear;
-				width: 100px;
-				height: 100px;
-				background: #08f;
-			}
-			.demo2.ng-hide{
-				height: 0;
-			}
-		</style>
-	</head>
-	
-<body>
-   	<div class="am-container" ng-controller="myCtrl">
-   		<div class="am-g">
-	   		<!--移动-->
-	   		<div class="demo" ng-class="{'move': isMove}" ng-click="isMove = true"></div>
-   		</div>
-   		
-   		<div class="am-g">
-	   		<!--modal-->
-	   		<div class="am-btn am-btn-primary" ng-click="showModal=true">测试</div>
-	   		<div class="modal" ng-class="{'on': showModal}" ng-show="showModal" ng-click="showModal=false"></div>
-   		</div>
-   		
-   		<!--slideIn-->
-   		<div class="am-g">
-	   		<input type="checkbox" ng-model="hideDemo2" />demo2
-	   		<div class="demo2" ng-hide="hideDemo2"></div>
-   		</div>
-   	</div>
-   	
-   	<script type="text/javascript">
-   		var myCtrl = angular.module("myApp", ['ngAnimate']).controller("myCtrl", function($scope){
-   			
-   		});
-   	</script>
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+div {
+  transition: all linear 0.5s;
+  background-color: lightblue;
+  height: 100px;
+  width: 100%;
+  position: relative;
+  top: 0;
+  left: 0;
+}
+
+.ng-hide {
+  height: 0;
+  width: 0;
+  background-color: transparent;
+  top:-200px;
+  left: 200px;
+}
+
+</style>
+<script src="https://cdn.static.runoob.com/libs/angular.js/1.4.6/angular.min.js"></script>
+<script src="https://cdn.static.runoob.com/libs/angular.js/1.4.6/angular-animate.min.js"></script>
+</head>
+<body ng-app="ngAnimate">
+
+<h1>隐藏 DIV: <input type="checkbox" ng-model="myCheck"></h1>
+
+<div ng-hide="myCheck"></div>
+
 </body>
 </html>
