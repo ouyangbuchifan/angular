@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width,initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no" />
+	    <meta content="telephone=no" name="format-detection" />
+		<title>模拟ios拖拽</title>
+		<link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.4/css/bootstrap.min.css">
+	    <script src="http://cdn.bootcss.com/angular.js/1.3.0/angular.js"></script>
+	    <style>
+			body{padding: 30px;}
+			ul,li,ol{list-style: none;}
+			.example{
+				position: fixed;
+				left: 0;
+				top: 100px;
+				width: 100px;
+				height: 100px;
+				background: #f60;
+				font-size: 14px;
+			}
+	    </style>
+	</head>
+<body class="am-g">
+	<div ng-controller="myform">
+		<drag class="example">
+			在线客服
+		</drag>
+	</div>
+
+
+    <script>
+    var myform = angular.module('myApp', []);
+    myform.controller('myform', function($scope){
+    	
+    });
+    myform.directive('drag', function($animate){
+    	return {
+    		restrict: 'EA',
+    		replace: true,
+    		transclude: true,
+    		template: '<a href="http://baidu.com" class="example" ng-transclude></a>',
+    		link: function(scope, element, attrs, controller){
+				var oW, oH;
+				element.on('touchstart', function(e){
+		            var touches = e.touches[0];
+		            oW = touches.clientX - element[0].offsetLeft;
+		            oH = touches.clientY - element[0].offsetTop;
+		            // 屏蔽浏览器的拖拽
+		            document.addEventListener("touchmove", defaultEvent, false);
+		        });
+		        element.on('touchmove', function(e){
+		            var touches = e.touches[0];            
+		            var oLeft = touches.clientX - oW;
+		            var oTop = touches.clientY - oH;
+		            if (oLeft < 0) {
+		                oLeft = 0;
+		            }else if(oLeft > document.documentElement.clientWidth - element[0].offsetWidth){
+		                oLeft = document.documentElement.clientWidth - element[0].offsetWidth
+		            }
+		            element[0].style.left = oLeft + 'px';
+		            element[0].style.top = oTop + 'px';
+		            
+		        });
+		
+		        element.on('touchend', function(e){
+		            var eLeft = parseInt(element[0].style.left) + element[0].offsetWidth/2;
+		            if (eLeft < document.documentElement.clientWidth/2){
+		            	var t = setInterval(function(){
+		            		eLeft -= 3;
+		            		element.css('left', eLeft+'px');
+		            		if (eLeft<=0) {
+		            			element.css('left', 0);
+		            			clearInterval(t);
+		            		}
+		            	}, 0.005);
+		            } else if(eLeft >= document.documentElement.clientWidth/2){
+						var sLeft = document.documentElement.clientWidth - element[0].offsetWidth;
+						var t = setInterval(function(){ 
+							eLeft += 3;
+		            		element.css('left', eLeft+'px');
+		            		if (eLeft >= sLeft) {
+		            			element.css('left', sLeft + 'px');
+		            			clearInterval(t);
+		            		}
+						}, 0.005);
+		            }
+		            document.removeEventListener("touchmove", defaultEvent, false);
+		        });
+		        
+		        function defaultEvent(e) {
+		            e.preventDefault();
+		        }
+		        
+    		}
+    	}
+    })
+   
+    </script>
+</body>
+</html>

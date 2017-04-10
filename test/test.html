@@ -5,53 +5,34 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 		<meta name="viewport" content="width=device-width,initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no" />
 	    <meta content="telephone=no" name="format-detection" />
-		<title>测试移动端拖拽</title>
-		<link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.4/css/bootstrap.min.css">
+		<title>掌厅登录</title>
+		<link href="http://cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap.css" rel="stylesheet">
 	    <script src="http://cdn.bootcss.com/angular.js/1.3.0/angular.js"></script>
-	    <style>
-			body{padding: 30px;}
-			ul,li,ol{list-style: none;}
-			.example{
-				position: fixed;
-				left: 10px;
-				top: 100px;
-				width: 100px;
-				height: 100px;
-				background: #f60;
-			}
-	    </style>
+
 	</head>
 <body class="am-g">
-	<div ng-controller="myform">
-		<drag class="example">
-			demo
-		</drag>
+	<div ng-controller="myCtrl">
+		<div class="btn btn-primary" ng-click="myfun()">确定</div>
+	</div>
+	
+	<div ng-controller="myCtrl2">
+		<span>{{myname}}</span>
 	</div>
 
 
     <script>
     var myform = angular.module('myApp', []);
-    myform.controller('myform', function($scope){
-    	
+    myform.controller('myCtrl', function($scope, $rootScope){
+    	$rootScope.myname = '根作用域';
+		$scope.myfun = function(){
+			$rootScope.myname = '根作用域';
+			console.log(111);
+		}
     });
-    myform.directive('drag', function(){
-    	return {
-    		restrict: 'EA',
-    		replace: true,
-    		transclude: true,
-    		template: '<div class="example" ng-transclude></div>',
-    		link: function(scope, element, attrs, controller){
-    			console.log(element);
-    			element.on('mousedown', function(){
-    				console.log(element[0].offsetWidth);
-    				element.addClass('demo');
-    			});
-    			element.on('mousemove', function(){
-    				
-    			});
-    		}
-    	}
-    })
+		
+	myform.controller('myCtrl2', function($scope, $rootScope){
+//		$scope.mytxt = $rootScope.myname;
+	})
    
     </script>
 </body>
