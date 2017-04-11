@@ -1,39 +1,357 @@
 <!DOCTYPE html>
 <html ng-app="myApp">
-	<head>
-		<meta charset="utf-8">
-		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-		<meta name="viewport" content="width=device-width,initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no" />
-	    <meta content="telephone=no" name="format-detection" />
-		<title>掌厅登录</title>
-		<link href="http://cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap.css" rel="stylesheet">
-	    <script src="http://cdn.bootcss.com/angular.js/1.3.0/angular.js"></script>
 
-	</head>
-<body class="am-g">
-	<div ng-controller="myCtrl">
-		<div class="btn btn-primary" ng-click="myfun()">确定</div>
-	</div>
-	
-	<div ng-controller="myCtrl2">
-		<span>{{myname}}</span>
-	</div>
-
-
-    <script>
-    var myform = angular.module('myApp', []);
-    myform.controller('myCtrl', function($scope, $rootScope){
-    	$rootScope.myname = '根作用域';
-		$scope.myfun = function(){
-			$rootScope.myname = '根作用域';
-			console.log(111);
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no" />
+    <meta content="telephone=no" name="format-detection" />
+    <title>测试移动端拖拽</title>
+    <link rel="stylesheet" href="http://wap.nx.10086.cn/css/app.css" />
+    <link rel="stylesheet" href="http://wap.nx.10086.cn/css/nxapp.css" />
+    <script src="http://cdn.bootcss.com/angular.js/1.3.0/angular.js"></script>
+    <style>
+        ul,li,ol {
+		    list-style: none;
 		}
-    });
 		
-	myform.controller('myCtrl2', function($scope, $rootScope){
-//		$scope.mytxt = $rootScope.myname;
-	})
-   
+		.online_ke {
+		    position: fixed;
+		    right: 0;
+		    top: 100px;
+		    font-size: 14px;
+		    width: 80px;
+		    height: 116px;
+		    text-align: right;
+		}
+    </style>
+</head>
+
+<body class="am-g">
+    <div ng-controller="myform">
+        <header class="am-cf"><a class="logo am-fl" href="/">中国移动</a>
+            <div class="header_r am-fr"><a class="slide_btn" data-am-offcanvas="{target: '#cebian'}">侧边</a>
+            </div>
+        </header>
+        <div class="ind ng-scope">
+            <div class="announCement">
+                <!-- ngIf: isLoading -->
+                <div class="bannerBlock swiper-container overflowField" app-swiper="infoListimg" app-swiper-wrapid="swiper-container" app-swiper-mode="horizontal" app-swiper-pagination="pagination">
+                    <ul class="bannerItem swiper-wrapper" style="height: 166.75px; width: 375px; transition-duration: 0s; transform: translate3d(0px, 0px, 0px);">
+                        <!-- ngRepeat: item in infoListimg | limitTo:7 | orderBy:sortOrder -->
+                        <li class="bannerSubItem swiper-slide ng-scope swiper-slide-visible swiper-slide-active" ng-repeat="item in infoListimg | limitTo:7 | orderBy:sortOrder " style="width: 375px; height: 166.75px;">
+                            <a ng-href="http://wap.nx.10086.cn/#!/activity" href="http://wap.nx.10086.cn/#!/activity">
+                                <img ng-src="img/优惠活动-640-240.jpg" src="img/优惠活动-640-240.jpg">
+                                <p ng-bind="item.adtips" class="ng-binding"></p>
+                            </a>
+                        </li>
+                        <!-- end ngRepeat: item in infoListimg | limitTo:7 | orderBy:sortOrder -->
+                    </ul>
+                    <div class="pagination"><span class="swiper-pagination-switch swiper-visible-switch swiper-active-switch"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="ind_hot">
+                <ul class="am-avg-sm-4 am-thumbnails">
+                    <!-- ngRepeat: item in wapMenuList | filter:{menutype:'0'}| orderBy:sortorder -->
+                    <li ng-repeat="item in wapMenuList | filter:{menutype:'0'}| orderBy:sortorder" class="ng-scope">
+                        <a ng-href="#!/recharge" href="#!/recharge">
+                            <img ng-src="img/main_menu01.png" class="am-thumbnail" src="img/main_menu01.png">
+                            <h4 ng-bind="item.menuname" class="ng-binding">充值缴费</h4>
+                        </a>
+                    </li>
+                    <!-- end ngRepeat: item in wapMenuList | filter:{menutype:'0'}| orderBy:sortorder -->
+                    <li ng-repeat="item in wapMenuList | filter:{menutype:'0'}| orderBy:sortorder" class="ng-scope">
+                        <a ng-href="#!/mobileList" href="#!/mobileList">
+                            <img ng-src="img/main_menu02.png" class="am-thumbnail" src="img/main_menu02.png">
+                            <h4 ng-bind="item.menuname" class="ng-binding">手机商城</h4>
+                        </a>
+                    </li>
+                    <!-- end ngRepeat: item in wapMenuList | filter:{menutype:'0'}| orderBy:sortorder -->
+                    <li ng-repeat="item in wapMenuList | filter:{menutype:'0'}| orderBy:sortorder" class="ng-scope">
+                        <a ng-href="#!/queryTelNumPage" href="#!/queryTelNumPage">
+                            <img ng-src="img/main_menu03.png" class="am-thumbnail" src="img/main_menu03.png">
+                            <h4 ng-bind="item.menuname" class="ng-binding">选号入网</h4>
+                        </a>
+                    </li>
+                    <!-- end ngRepeat: item in wapMenuList | filter:{menutype:'0'}| orderBy:sortorder -->
+                    <li ng-repeat="item in wapMenuList | filter:{menutype:'0'}| orderBy:sortorder" class="ng-scope">
+                        <a ng-href="#!/businessDeal" href="#!/businessDeal">
+                            <img ng-src="img/main_menu04.png" class="am-thumbnail" src="img/main_menu04.png">
+                            <h4 ng-bind="item.menuname" class="ng-binding">业务办理</h4>
+                        </a>
+                    </li>
+                    <!-- end ngRepeat: item in wapMenuList | filter:{menutype:'0'}| orderBy:sortorder -->
+                    <li ng-repeat="item in wapMenuList | filter:{menutype:'0'}| orderBy:sortorder" class="ng-scope">
+                        <a ng-href="#!/serviceQuery" href="#!/serviceQuery">
+                            <img ng-src="img/main_menu05.png" class="am-thumbnail" src="img/main_menu05.png">
+                            <h4 ng-bind="item.menuname" class="ng-binding">查询服务</h4>
+                        </a>
+                    </li>
+                    <!-- end ngRepeat: item in wapMenuList | filter:{menutype:'0'}| orderBy:sortorder -->
+                    <li ng-repeat="item in wapMenuList | filter:{menutype:'0'}| orderBy:sortorder" class="ng-scope">
+                        <a ng-href="#!/fourGPrefecture" href="#!/fourGPrefecture">
+                            <img ng-src="img/main_menu06.png" class="am-thumbnail" src="img/main_menu06.png">
+                            <h4 ng-bind="item.menuname" class="ng-binding">4G专区</h4>
+                        </a>
+                    </li>
+                    <!-- end ngRepeat: item in wapMenuList | filter:{menutype:'0'}| orderBy:sortorder -->
+                    <li ng-repeat="item in wapMenuList | filter:{menutype:'0'}| orderBy:sortorder" class="ng-scope">
+                        <a ng-href="#!/activity" href="#!/activity">
+                            <img ng-src="img/main_menu07.png" class="am-thumbnail" src="img/main_menu07.png">
+                            <h4 ng-bind="item.menuname" class="ng-binding">优惠活动</h4>
+                        </a>
+                    </li>
+                    <!-- end ngRepeat: item in wapMenuList | filter:{menutype:'0'}| orderBy:sortorder -->
+                    <li ng-repeat="item in wapMenuList | filter:{menutype:'0'}| orderBy:sortorder" class="ng-scope">
+                        <a ng-href="#!/myChinaMobile" href="#!/myChinaMobile">
+                            <img ng-src="img/main_menu08.png" class="am-thumbnail" src="img/main_menu08.png">
+                            <h4 ng-bind="item.menuname" class="ng-binding">我的移动</h4>
+                        </a>
+                    </li>
+                    <!-- end ngRepeat: item in wapMenuList | filter:{menutype:'0'}| orderBy:sortorder -->
+                </ul>
+            </div>
+            <div class="ind_hd"><a class="ind_tit" href="javascript:;" ng-click="demo()"><em></em><h3>畅销机型</h3></a>
+                <div class="webkit_box ind_hd_cont">
+                    <a class="ind_hd_l box_flex" ng-click="terminalDetail('GD-06358adf5350467d95f7719b473f5700')">
+                        <img src="http://wap.nx.10086.cn/wap_img/5x-320-252.png" alt="">
+                    </a>
+                    <div class="ind_hd_r box_flex">
+                        <a class="ind_hd_r1" ng-click="terminalDetail('GD-246479d218e148eeb65f4e6919bfca18')">
+                            <img src="http://wap.nx.10086.cn/wap_img/x6l-319-124.jpg" alt="">
+                        </a>
+                        <a class="ind_hd_r2" ng-click="terminalDetail('GD-4d1d9255b5db4886af58e4c943973a8c')">
+                            <img src="http://wap.nx.10086.cn/wap_img/Note3-319-127.jpg" alt="">
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="ind_md">
+                <div class="ind_tit">
+                    <div class="am-fl"><em></em>
+                        <h3>选号码</h3>
+                    </div>
+                    <div class="md_sel am-fl">
+                        <div class="md_sel_hd" ng-click="setShowMe(0)">
+                            <h5 class="ng-binding">银川市</h5><span class="am-icon-caret-down"></span>
+                        </div>
+                        <ol class="md_sel_md ng-hide" ng-show="showMe[0]">
+                            <!-- ngRepeat: city in cities -->
+                            <li ng-click="chk(city.id,city.name)" ng-repeat="city in cities" ng-bind="city.name" class="ng-scope ng-binding">银川市</li>
+                            <!-- end ngRepeat: city in cities -->
+                            <li ng-click="chk(city.id,city.name)" ng-repeat="city in cities" ng-bind="city.name" class="ng-scope ng-binding">石嘴山市</li>
+                            <!-- end ngRepeat: city in cities -->
+                            <li ng-click="chk(city.id,city.name)" ng-repeat="city in cities" ng-bind="city.name" class="ng-scope ng-binding">吴忠市</li>
+                            <!-- end ngRepeat: city in cities -->
+                            <li ng-click="chk(city.id,city.name)" ng-repeat="city in cities" ng-bind="city.name" class="ng-scope ng-binding">固原市</li>
+                            <!-- end ngRepeat: city in cities -->
+                            <li ng-click="chk(city.id,city.name)" ng-repeat="city in cities" ng-bind="city.name" class="ng-scope ng-binding">中卫市</li>
+                            <!-- end ngRepeat: city in cities -->
+                        </ol>
+                    </div>
+                    <div class="am-fr md_refresh" ng-click="queryNum();"><i class="iconfont"></i>换一批</div>
+                </div>
+                <ul class="am-avg-sm-3 am-thumbnails">
+                    <!-- ngRepeat: tel in telnumList | limitTo : 9 -->
+                    <li ng-repeat="tel in telnumList | limitTo : 9" class="ng-scope">	<a ng-click="order(tel.telNum,tel.preFee,tel.regionName,tel.orgId,tel.region)" ng-bind="tel.telNum" class="ng-binding">13895637424</a>
+                    </li>
+                    <!-- end ngRepeat: tel in telnumList | limitTo : 9 -->
+                    <li ng-repeat="tel in telnumList | limitTo : 9" class="ng-scope">	<a ng-click="order(tel.telNum,tel.preFee,tel.regionName,tel.orgId,tel.region)" ng-bind="tel.telNum" class="ng-binding">13895637643</a>
+                    </li>
+                    <!-- end ngRepeat: tel in telnumList | limitTo : 9 -->
+                    <li ng-repeat="tel in telnumList | limitTo : 9" class="ng-scope">	<a ng-click="order(tel.telNum,tel.preFee,tel.regionName,tel.orgId,tel.region)" ng-bind="tel.telNum" class="ng-binding">13895634714</a>
+                    </li>
+                    <!-- end ngRepeat: tel in telnumList | limitTo : 9 -->
+                    <li ng-repeat="tel in telnumList | limitTo : 9" class="ng-scope">	<a ng-click="order(tel.telNum,tel.preFee,tel.regionName,tel.orgId,tel.region)" ng-bind="tel.telNum" class="ng-binding">13895637074</a>
+                    </li>
+                    <!-- end ngRepeat: tel in telnumList | limitTo : 9 -->
+                    <li ng-repeat="tel in telnumList | limitTo : 9" class="ng-scope">	<a ng-click="order(tel.telNum,tel.preFee,tel.regionName,tel.orgId,tel.region)" ng-bind="tel.telNum" class="ng-binding">13895637034</a>
+                    </li>
+                    <!-- end ngRepeat: tel in telnumList | limitTo : 9 -->
+                    <li ng-repeat="tel in telnumList | limitTo : 9" class="ng-scope">	<a ng-click="order(tel.telNum,tel.preFee,tel.regionName,tel.orgId,tel.region)" ng-bind="tel.telNum" class="ng-binding">13895636724</a>
+                    </li>
+                    <!-- end ngRepeat: tel in telnumList | limitTo : 9 -->
+                    <li ng-repeat="tel in telnumList | limitTo : 9" class="ng-scope">	<a ng-click="order(tel.telNum,tel.preFee,tel.regionName,tel.orgId,tel.region)" ng-bind="tel.telNum" class="ng-binding">13895637214</a>
+                    </li>
+                    <!-- end ngRepeat: tel in telnumList | limitTo : 9 -->
+                    <li ng-repeat="tel in telnumList | limitTo : 9" class="ng-scope">	<a ng-click="order(tel.telNum,tel.preFee,tel.regionName,tel.orgId,tel.region)" ng-bind="tel.telNum" class="ng-binding">13895637294</a>
+                    </li>
+                    <!-- end ngRepeat: tel in telnumList | limitTo : 9 -->
+                    <li ng-repeat="tel in telnumList | limitTo : 9" class="ng-scope">	<a ng-click="order(tel.telNum,tel.preFee,tel.regionName,tel.orgId,tel.region)" ng-bind="tel.telNum" class="ng-binding">13895637847</a>
+                    </li>
+                    <!-- end ngRepeat: tel in telnumList | limitTo : 9 -->
+                    <!-- ngIf: queryNumIsLoading -->
+                </ul>
+            </div>
+            <div class="ind_bd"><a class="ind_tit" href="javascript:;"><em></em><h3>移动产品</h3></a>
+                <ul class="am-avg-sm-3 am-thumbnails">
+                    <li>
+                        <a href="#!/goodsInfo?goodsid=GD-01160" class="item">
+                            <img ng-src="http://wap.nx.10086.cn/wap_img/n2.jpg" alt="4G流量套餐" src="http://wap.nx.10086.cn/wap_img/n2.jpg">
+                            <h4 class="item_heading">4G流量套餐</h4>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#!/goodsInfo?goodsid=GD-01021" class="item">
+                            <img ng-src="http://wap.nx.10086.cn/wap_img/n3.jpg" alt="4G流量季度包" src="http://wap.nx.10086.cn/wap_img/n3.jpg">
+                            <h4 class="item_heading">4G流量季度包</h4>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#!/goodsInfo?goodsid=GD-01027" class="item">
+                            <img ng-src="http://wap.nx.10086.cn/wap_img/n4.jpg" alt="4G流量加油包" src="http://wap.nx.10086.cn/wap_img/n4.jpg">
+                            <h4 class="item_heading">4G流量加油包</h4>
+                        </a>
+                    </li>
+                </ul>
+                <!-- ngIf: isLoading -->
+            </div>
+            <div id="cebian" class="am-offcanvas">
+                <div class="am-offcanvas-bar am-offcanvas-bar-flip">
+                    <div class="am-offcanvas-content">
+                        <div class="ind_slide_hd">
+                            <a href="#!/myChinaMobile" ind-aside-user="">
+                                <img src="http://wap.nx.10086.cn/wap_img/ind01.png" class="pic" alt="">
+                                <!-- ngIf: servnumber -->
+                                <!-- ngIf: !servnumber -->
+                                <h4 ng-if="!servnumber" class="ng-scope">立即登录</h4>
+                                <!-- end ngIf: !servnumber -->
+                            </a>
+                        </div>
+                        <ul class="ind_slide_md">
+                            <li>
+                                <a href="#!/mobileList">
+                                    <img src="http://wap.nx.10086.cn/wap_img/m_test2.png" alt="">
+                                    <h4>商城</h4>
+                                    <h3>开学季，购心机！</h3><i class="iconfont"></i>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#!/activity">
+                                    <img src="http://wap.nx.10086.cn/wap_img/m_test7.png" alt="">
+                                    <h4>活动</h4>
+                                    <h3>宁夏移动 周五特惠</h3><i class="iconfont"></i>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="http://wap.nx.10086.cn/FlowManager-service1/download.jsp">
+                                    <img src="http://wap.nx.10086.cn/wap_img/m_test4.png" alt="">
+                                    <h4>应用</h4>
+                                    <h3>下载流量管家</h3><i class="iconfont"></i>
+                                </a>
+                            </li>
+                        </ul>
+                        <ul class="ind_slide_bd am-avg-sm-3">
+                            <li><a href="#!/orderQuery"><i class="iconfont tit"></i><h4>订单</h4><i class="iconfont hot"></i></a>
+                            </li>
+                            <li><a href="#!/collection"><i class="iconfont tit"></i><h4>收藏</h4><i class="iconfont hot"></i></a>
+                            </li>
+                            <li><a href="#!/qryAccountBalance"><i class="iconfont tit"></i><h4>余额查询</h4><i class="iconfont hot"></i></a>
+                            </li>
+                            <li><a href="#!/queryfeeNX"><i class="iconfont tit"></i><h4>实时话费</h4><i class="iconfont hot"></i></a>
+                            </li>
+                            <li><a href="#!/billQuery"><i class="iconfont tit"></i><h4>账单查询</h4><i class="iconfont hot"></i></a>
+                            </li>
+                            <li><a href="#!/llQuery"><i class="ll_icon tit"></i><h4>剩余流量</h4><i class="iconfont hot"></i></a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="cancellation ng-hide" ng-click="modalChange()" ng-show="homeModel.showLogout"><i class="iconfont"></i> 注销</div>
+                </div>
+            </div>
+            <div class="am-modal am-modal-confirm am-modal-active db ng-hide" tabindex="-1" id="my-confirm" ng-show="homeModel.modalSta">
+                <div class="am-modal-dialog">
+                    <div class="am-modal-bd">您将退出登录状态，确定吗？</div>
+                    <div class="am-modal-footer"><span class="am-modal-btn" data-am-modal-cancel="" ng-click="modalChange()">取消</span>  <span class="am-modal-btn" data-am-modal-confirm="" ng-click="userLogoutHome()">确定</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        
+        <!--footer-->
+        <footer footer-user></footer>
+    </div>
+    <script>
+        var myform = angular.module('myApp', []);
+        myform.controller('myform', function($scope) {});
+        myform.directive('footerUser', function() {
+            return {
+                restrict: 'EA',
+                replace: true,
+                transclude: true,
+                template: ['<footer class="am-text-center">', '<ul class="footer_hd">', '<li ng-if="servnumber"><a href="#!/myChinaMobile">123456</a></li>', '<li ng-if="servnumber"><span ng-click="cancelLogout()">退出</span></li>', '<li ng-if="!servnumber"><a href="#!/login">登录</a></li>', '<li><a href="#!/aboutUs">关于我们</a></li>', '</ul><hr>', '<p><span>中国移动</span>  <span>京ICP备05002571</span></p>', '<div class="go_top"></div>', '<div class="online_ke" id="kefu" ng-click="kefu()">', '<img src="http://wap.nx.10086.cn/wap_img/online_kf.png"/>', '</div>', '</footer>'].join(''),
+                link: function(scope, element, attrs) {
+                    /**
+                     * 客服小图标
+                     **/
+                    var oW, oH;
+                    // jqlite的find()只能以标签查找，返回数组
+                    var kefuDom = document.getElementById('kefu');
+                    console.log(kefuDom.height);
+                    kefuDom.addEventListener('touchstart', function(e) {
+                        var touches = e.touches[0];
+                        oW = touches.clientX - kefuDom.offsetLeft;
+                        oH = touches.clientY - kefuDom.offsetTop;
+                        // 阻止浏览器默认滑屏||翻页
+                        document.addEventListener("touchmove", defaultEvent, false);
+                    });
+                    kefuDom.addEventListener('touchmove', function(e) {
+                        var touches = e.touches[0];
+                        var oLeft = touches.clientX - oW;
+                        var oTop = touches.clientY - oH;
+                        if (oLeft < 0) {
+                            oLeft = 0;
+                        } else if (oLeft > document.documentElement.clientWidth - 45) { // 如果超过右边，重置位置
+                            oLeft = document.documentElement.clientWidth - 45
+                        }
+                        if (oTop < 0) {
+                            oTop = 0;
+                        } else if (oTop > document.documentElement.clientHeight - 113) {
+                            oTop = document.documentElement.clientHeight - 113;
+                        }
+                        kefuDom.style.left = oLeft + 'px';
+                        kefuDom.style.top = oTop + 'px';
+                    });
+                    kefuDom.addEventListener('touchend', function(e) {
+                        var eLeft = parseInt(kefuDom.style.left) + 40;
+                        if (eLeft < document.documentElement.clientWidth / 2) {
+                            var t = window.setInterval(function() {
+                                eLeft -= 3;
+                                kefuDom.style.left = eLeft + 'px';
+                                if (eLeft <= 0) {
+                                    kefuDom.style.left = 0;
+                                    clearInterval(t);
+                                }
+                            }, 0.005);
+                            kefuDom.style.textAlign = 'left';
+                        } else if (eLeft >= document.documentElement.clientWidth / 2) {
+                            var sLeft = document.documentElement.clientWidth - 80;
+                            var t = setInterval(function() {
+                                eLeft += 3;
+                                kefuDom.style.left = eLeft + 'px';
+                                if (eLeft >= sLeft) {
+                                    kefuDom.style.left = sLeft + 'px';
+                                    clearInterval(t);
+                                }
+                            }, 0.005);
+                            kefuDom.style.textAlign = 'right';
+                        }
+                        document.removeEventListener("touchmove", defaultEvent, false);
+                    });
+
+                    function defaultEvent(e) {
+                        e.preventDefault();
+                    };
+                    // 客服跳转路径
+                    scope.kefu = function() {
+                        location.href = 'http://www.baidu.com';
+                    }
+                }
+            }
+        })
     </script>
 </body>
+
 </html>
