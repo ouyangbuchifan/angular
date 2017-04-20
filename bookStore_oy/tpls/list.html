@@ -1,0 +1,38 @@
+<div class="container">
+	<ol class="breadcrumb">
+		<li><a href="#/">首页</a></li>
+		<li class="active">列表</li>
+	</ol>
+	<div class="row">
+		<div class="col-md-3">
+			<div class="list-group">
+				<p class="list-group-item active">书籍类型</p>
+				<a href="javascript:;" class="list-group-item">全部</a>
+				<a href="javascript:;" class="list-group-item">计算机</a>
+				<a href="javascript:;" class="list-group-item">金融</a>
+				<a href="javascript:;" class="list-group-item">哲学</a>
+				<a href="javascript:;" class="list-group-item">高端办公</a>
+			</div>
+		</div>
+		<div class="col-md-9">
+			<table class="table table-bordered table-striped">
+				<tr>
+					<td>序号</td>
+					<td>书名</td>
+					<td>作者</td>
+					<td>出版日期</td>
+					<td>定价</td>
+					<td>操作</td>
+				</tr>
+				<tr ng-repeat="item in listModel.proList">
+					<td ng-bind="$index+1"></td>
+					<td ng-bind="item.name"></td>
+					<td ng-bind="item.author"></td>
+					<td ng-bind="updateDate"></td>
+					<td ng-bind="item.fee"></td>
+					<td><a href="{{item.proUrl}}">详情</a></td>
+				</tr>
+			</table>
+		</div>
+	</div>
+</div>

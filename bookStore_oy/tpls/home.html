@@ -1,0 +1,26 @@
+<div class="container">
+	<form method="post" ng-submit="processForm()" class="form-horizontal" name="myForm" autocomplete="off" novalidate="novalidate">
+		<h2 class="text-center">图书管理系统</h2>
+		<div class="form-group">
+			<label class="control-label col-md-2 text-right">用户名：</label>
+			<div class="col-md-10">
+				<input type="text" class="form-control" name="name" ng-model="userInfoModel.email" ng-required ng-pattern="/^[\w\+\-]+(\.[\w\+\-]+)*@[a-z\d\-]+(\.[a-z\d\-]+)*\.([a-z]{2,4})$/i" placeholder="推荐使用126邮箱" autocomplete="off"/>
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="control-label col-md-2 text-right">密码：</label>
+			<div class="col-md-10">
+				<input type="password" name="pwd" class="form-control" ng-model="userInfoModel.pwd" ng-required ng-pattern="/^[\S]{6,16}$/" placeholder="只能是数字、字母、下划线" autocomplete="off" />
+			</div>
+		</div>
+		<div class="form-group">
+			<p class="col-md-offset-2 col-md-10 text-danger" ng-show="myForm.$submitted&&(myForm.name.$invalid||myForm.pwd.$invalid)||userInfoModel.iserror">账号或密码不正确，请您核实</p>
+		</div>
+		<div class="form-group">
+			<div class="col-md-10 col-md-offset-2">
+				<button type="submit" class="btn btn-success btn-md" ng-disabled="myForm.name.$pristine||myForm.pwd.$pristine">登录</button>
+				<a class="btn btn-md btn-default">注册</a>
+			</div>
+		</div>
+	</form>
+</div>
