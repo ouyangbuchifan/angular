@@ -6,33 +6,36 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width,initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no" />
     <meta content="telephone=no" name="format-detection" />
-    <title>测试移动端拖拽</title>
-    <link rel="stylesheet" href="http://wap.nx.10086.cn/css/app.css" />
-    <link rel="stylesheet" href="http://wap.nx.10086.cn/css/nxapp.css" />
+    <title>测试地址</title>
+    <script src="http://cdn.bootcss.com/jquery/2.1.4/jquery.js"></script>
+    <link href="http://cdn.bootcss.com/bootstrap/3.3.0/css/bootstrap.css" rel="stylesheet">
     <script src="http://cdn.bootcss.com/angular.js/1.3.0/angular.js"></script>
+    <style>
+
+    </style>
 </head>
 
 <body class="am-g">
-    <div ng-controller="myform">
-        <div ng-bind="txt||'未知' "></div>
-        
+    <div ng-controller="myCtrl">
         
     </div>
     <script>
         var myform = angular.module('myApp', []);
-        myform.controller('myform', function($scope) {
-        	$scope.txt = "客家"
+        myform.controller('myCtrl', function($scope, $http, $location) {
+        	console.log('absUrl: ' + $location.absUrl());
+        	console.log('url: ' + $location.url());
+        	console.log('path: ' + $location.path());
+        	
         });
-        myform.directive('footerUser', function() {
-            return {
-                restrict: 'EA',
-                replace: true,
-                transclude: true,
-                template: '',
-                link: function(scope, element, attrs) {
-                    
-                }
-            }
+        myform.directive('mycode', function(){
+        	return {
+        		restrict: 'EA',
+        		replace: true,
+        		template: '<div class="btn code_btn">发送</div>',
+        		link: function(scope, element, controller){
+        			
+        		}
+        	}
         })
     </script>
 </body>
