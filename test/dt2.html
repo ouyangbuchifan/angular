@@ -41,6 +41,7 @@
 			  return {
 			    enter: function(element, doneFn) {
 			      var height = element[0].offsetHeight;
+			      console.log(element[0]);
 			      return $animateCss(element, {
 			        from: { height:'0px' },
 			        to: { height:30 + 'px' },
