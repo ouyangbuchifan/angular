@@ -7,95 +7,111 @@
     <meta name="viewport" content="width=device-width,initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no" />
     <meta content="telephone=no" name="format-detection" />
     <title>测试地址</title>
-    <script src="/static/js/jquery-1.9.1.min.js"></script>
-    <link href="../static/css/bootstrap.min.css" rel="stylesheet">
     <script src="/static/js/angular.js"></script>
     <style>
-		
+		.llQuery_body {
+		    background-color: #fff;
+		    padding: 10px;
+		    border-bottom: 1px solid #c2c2c2;
+		    position: relative;
+		    height: 160px;
+		}
+		#ringCanvas1 {
+		    position: absolute;
+		    left: 0;
+		    top: 0;
+		    right: 0;
+		    bottom: 0;
+		    z-index: 1;
+		    margin: auto;
+		}
+		#ringCanvas2 {
+		    position: absolute;
+		    left: 0;
+		    top: 0;
+		    right: 0;
+		    bottom: 0;
+		    z-index: 2;
+		    opacity: .1;
+		    margin: auto;
+		}
     </style>
 </head>
 
 <body class="am-g">
     <div ng-controller="myCtrl">
-        <div class="precharge am-cf">
-			<ul>
-				<li class="pre_item" ng-click="prechargeProduct(0,0)" ng-class="{'active':prechargeId == 0}">
-				    <dl>
-						<dt>预存{{prechargeModel[0].yc}}元</dt>
-					    <dd>送{{prechargeModel[0].hbj}}元和包电子券</dd>
-					</dl>
-				</li>
-				<li class="pre_item" ng-click="prechargeProduct(1,0)" ng-class="{'active':prechargeId == 1}">
-				    <dl>
-						<dt>预存{{prechargeModel[1].yc}}元</dt>
-					    <dd>送{{prechargeModel[1].hbj}}元和包电子券</dd>
-					</dl>
-				</li>
-				<li class="pre_itemLong" ng-show="prechargeSummaryId == 0" ng-class="{'active':prechargeSummaryId == 0}">
-					<div class="pre_item_summary">
-						<p class="pre_item_p">① 立即到账话费：{{prechargeSummary.dz}}元</p>
-						<p class="pre_item_p">② 立即到账和包电子券：{{prechargeSummary.hbj}}元</p>
-						<p class="pre_item_p">③ 其他预存分月返：{{prechargeSummary.yf}}元</p>
-						<p class="pre_item_p">④ 预存返回周期：{{prechargeSummary.zq}}个月</p>
-					</div>
-				</li>
-				<li class="pre_item" ng-click="prechargeProduct(2,1)" ng-class="{'active':prechargeId == 2}">
-				    <dl>
-						<dt>预存{{prechargeModel[2].yc}}元</dt>
-					    <dd>送{{prechargeModel[2].hbj}}元和包电子券</dd>
-					</dl>
-				</li>
-				<li class="pre_item" ng-click="prechargeProduct(3,1)" ng-class="{'active':prechargeId == 3}">
-				    <dl>
-						<dt>预存{{prechargeModel[3].yc}}元</dt>
-					    <dd>送{{prechargeModel[3]hbj}}元和包电子券</dd>
-					</dl>
-				</li>
-				<li class="pre_itemLong" ng-show="prechargeSummaryId == 1" ng-class="{'active':prechargeSummaryId == 1}">
-					<div class="pre_item_summary">
-						<p class="pre_item_p">① 立即到账话费：{{prechargeSummary.dz}}元</p>
-						<p class="pre_item_p">② 立即到账和包电子券：{{prechargeSummary.hbj}}元</p>
-						<p class="pre_item_p">③ 其他预存分月返：{{prechargeSummary.yf}}元</p>
-						<p class="pre_item_p">④ 预存返回周期：{{prechargeSummary.zq}}个月</p>
-					</div>
-				</li>
-			</ul>
-		</div>
+    	<div class="llQuery_body">
+        	<div ring ring-resourcescount="llQuery.resourcescount" ring-usedrescount="llQuery.usedrescount"></div>
+        </div>
+        <div ng-bind="txt"></div>
     </div>
     <script>
         var myApp = angular.module('myApp', []);
         myApp.controller('myCtrl', ['$scope',function($scope){
-        	 $scope.prechargeModel = [
-	        	{
-	        		yc: "200",
-	        		dz: "40",
-	        		hbj: "60",
-	        		yf: "20",
-	        		zq: "8"
-	        	},
-	        	{
-	        		yc: "300",
-	        		dz: "90",
-	        		hbj: "90",
-	        		yf: "20",
-	        		zq: "8"
-	        	},
-	        	{
-	        		yc: "500",
-	        		dz: "150",
-	        		hbj: "150",
-	        		yf: "20",
-	        		zq: "8"
-	        	},
-	        	{
-	        		yc: "1000",
-	        		dz: "300",
-	        		hbj: "300",
-	        		yf: "20",
-	        		zq: "8"
-	        	}
-	        ];
+        	$scope.llQuery = {
+        		resourcescount:3372.00,			//总数
+        		usedrescount:3000.00			//已用
+        	}
+        	$scope.txt = "流量查询"
         }]);
+        myApp.directive('ring',function(){
+        	return {
+    			restrict: "AE",
+	            transclude: true,
+	            replace: false,
+	            scope: {resourcescount: '=ringResourcescount', usedrescount: '=ringUsedrescount'},
+	            template: '<div><canvas id="ringCanvas1" width="160px" height="140px"></canvas><canvas id="ringCanvas2" width="160px" height="140px"></canvas></div>',
+	            link: function (scope, element, attrs) {
+	                var c2 = document.getElementById("ringCanvas2");
+	                var ctx2 = c2.getContext("2d");
+	                ctx2.beginPath();
+	                ctx2.lineWidth = 2;
+	                ctx2.strokeStyle = "rgb(0,0,0)";
+	                ctx2.lineCap = "round";
+	                ctx2.arc(80, 80, 70, 0.75 * Math.PI, 0.25 * Math.PI);
+	                ctx2.stroke();
+	                ctx2.closePath();
+	
+	                var c = document.getElementById("ringCanvas1");
+	                var ctx = c.getContext("2d");
+	                ctx.save();
+	                var color = "rgb(143,193,31)";
+	                var animate = function (usedrescount, resourcescount) {
+	                    var endPoint = 0.75 * Math.PI;
+	                    var iTarget = usedrescount / resourcescount;
+	                    iTarget = iTarget * 1.5 * Math.PI + 0.75 * Math.PI;
+	                    var timer = setInterval(function () {
+	                        ctx.beginPath();
+	                        ctx.lineWidth = 2;
+	                        ctx.clearRect(0, 0, 200, 200);
+	                        ctx.strokeStyle = color;
+	                        ctx.shadowBlur = 2;
+	                        ctx.shadowColor = color;
+	                        ctx.lineCap = "round";
+	                        if (iTarget > endPoint) {
+	                            endPoint += 0.01 * 1.5 * Math.PI;
+	                            if (endPoint > 1.5 * Math.PI && endPoint < 1.95 * Math.PI) {
+	                                color = "#fbed00";
+	                            }
+	                            else if (endPoint > 1.95 * Math.PI) {
+	                                color = "#ff0000";
+	                            }
+	                        }
+	                        else {
+	                            endPoint = iTarget;
+	                            clearInterval(timer);
+	                        }
+	                        ctx.arc(80, 80, 70, 0.75 * Math.PI, endPoint);
+	                        ctx.stroke();
+	                        ctx.closePath();
+	                    }, 20);
+	                };
+	                scope.$watch('resourcescount', function () {
+	                    animate(scope.usedrescount, scope.resourcescount);
+	                });
+	            }
+    		}
+        });
     </script>
 </body>
 
