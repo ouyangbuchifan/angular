@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no" />
+    <meta content="telephone=no" name="format-detection" />
+    <title>流量查询</title>
+    <script src="/static/js/angular.js"></script>
+    <style>
+		.llQuery_body {
+		    background-color: #fff;
+		    padding: 10px;
+		    border-bottom: 1px solid #c2c2c2;
+		    position: relative;
+		    height: 160px;
+		}
+		#ringCanvas1 {
+		    position: absolute;
+		    left: 0;
+		    top: 0;
+		    right: 0;
+		    bottom: 0;
+		    z-index: 1;
+		    margin: auto;
+		}
+		#ringCanvas2 {
+		    position: absolute;
+		    left: 0;
+		    top: 0;
+		    right: 0;
+		    bottom: 0;
+		    z-index: 2;
+		    opacity: .1;
+		    margin: auto;
+		}
+    </style>
+</head>
+
+<body class="am-g">
+    <div ng-controller="myCtrl">
+    	<div class="llQuery_body">
+        	<div ring ring-resourcescount="llQuery.resourcescount" ring-usedrescount="llQuery.usedrescount"></div>
+        </div>
+        <div ng-bind="txt"></div>
+        <div>已用流量：{{llQuery.usedrescount}}MB</div>
+        <div>流量总数：{{llQuery.resourcescount}}MB</div>
+
+    </div>
+    <script>
+        var myApp = angular.module('myApp', []);
+        myApp.controller('myCtrl', ['$scope',function($scope){
+        	$scope.llQuery = {
+        		resourcescount:3372.00,			//总数
+        		usedrescount:3000.00			//已用
+        	}
+        	$scope.txt = "流量查询"
+        }]);
+        myApp.directive('ring',function(){
+        	return {
+    			restrict: "AE",
+	            transclude: true,
+	            replace: false,
+	            scope: {resourcescount: '=ringResourcescount', usedrescount: '=ringUsedrescount'},
+	            template: '<div><canvas id="ringCanvas1" width="160px" height="140px"></canvas><canvas id="ringCanvas2" width="160px" height="140px"></canvas></div>',
+	            link: function (scope, element, attrs) {
+	                var c2 = document.getElementById("ringCanvas2");
+	                var ctx2 = c2.getContext("2d");
+	                ctx2.beginPath();
+	                ctx2.lineWidth = 2;
+	                ctx2.strokeStyle = "rgb(0,0,0)";
+	                ctx2.lineCap = "round";
+	                ctx2.arc(80, 80, 70, 0.75 * Math.PI, 0.25 * Math.PI);
+	                ctx2.stroke();
+	                ctx2.closePath();
+	
+	                var c = document.getElementById("ringCanvas1");
+	                var ctx = c.getContext("2d");
+	                ctx.save();
+	                var color = "rgb(143,193,31)";
+	                var animate = function (usedrescount, resourcescount) {
+	                    var endPoint = 0.75 * Math.PI;
+	                    var iTarget = usedrescount / resourcescount;
+	                    iTarget = iTarget * 1.5 * Math.PI + 0.75 * Math.PI;
+	                    var timer = setInterval(function () {
+	                        ctx.beginPath();
+	                        ctx.lineWidth = 2;
+	                        ctx.clearRect(0, 0, 200, 200);
+	                        ctx.strokeStyle = color;
+	                        ctx.shadowBlur = 2;
+	                        ctx.shadowColor = color;
+	                        ctx.lineCap = "round";
+	                        if (iTarget > endPoint) {
+	                            endPoint += 0.01 * 1.5 * Math.PI;
+	                            if (endPoint > 1.5 * Math.PI && endPoint < 1.95 * Math.PI) {
+	                                color = "#fbed00";
+	                            }
+	                            else if (endPoint > 1.95 * Math.PI) {
+	                                color = "#ff0000";
+	                            }
+	                        }
+	                        else {
+	                            endPoint = iTarget;
+	                            clearInterval(timer);
+	                        }
+	                        ctx.arc(80, 80, 70, 0.75 * Math.PI, endPoint);
+	                        ctx.stroke();
+	                        ctx.closePath();
+	                    }, 20);
+	                };
+	                scope.$watch('resourcescount', function () {
+	                    animate(scope.usedrescount, scope.resourcescount);
+	                });
+	            }
+    		}
+        });
+    </script>
+</body>
+
+</html>

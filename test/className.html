@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width,initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no" />
+	    <meta content="telephone=no" name="format-detection" />
+		<title>指令</title>
+		<link rel="stylesheet" href="/static/css/bootstrap.min.css">
+	<script src="/static/js/jquery-1.9.1.min.js"></script>
+    <script src="/static/js/angular.js"></script>
+    <style>
+	.on{color:#f00;}
+    </style>
+
+	</head>
+<body>
+    <div class="container" ng-controller="myCtrl">
+    	<!-- ng-class="{'on': cho == item.val}" ng-class="item.cla" -->
+    	<!-- ng-class="itemClass" -->
+    	<ul>
+    		<li ng-repeat="item in list" ng-class="{'on': cho == item.val}" class="pay_{{item.cla}}"  ng-click="chose(item.val)">
+    			{{item.name}}
+    		</li>
+    	</ul>
+    	
+    </div>
+
+    <script type="text/javascript">
+    	var mymodule = angular.module("myApp", []);
+    	mymodule.controller("myCtrl", function($scope, $location, myService){
+    		$scope.list = [
+	            { name: '银联支付',val: 'unipay', cla:'yinlian' },
+	            { name: '支付宝',val: 'Alipay', cla:'zhifubao' },
+	            { name: '话费支付',val: 'Balance', cla:'yinlian' }
+	        ];
+	        $scope.cho = 'unipay';
+	        $scope.chose = function(val) {
+	        	
+	        	$scope.cho = val;
+	        	console.log(val, $scope.cho);
+
+	        }
+
+	        $scope.itemClass = 'on pay_yinlian'
+    	});
+    	mymodule.service("myService", function(){
+    		this.myFun = function(x){
+    			return x.toString(16);
+    		}
+    		
+    	});
+        
+
+    </script>
+</body>
+</html>

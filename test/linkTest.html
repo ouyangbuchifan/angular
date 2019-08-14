@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width,initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no" />
       <meta content="telephone=no" name="format-detection" />
-    <title>指令</title>
+    <title>test</title>
 <!--     <link rel="stylesheet" type="text/css" href="http://cdn.amazeui.org/amazeui/2.7.2/css/amazeui.min.css"/>
     <link rel="stylesheet" href="http://wap.nx.10086.cn/css/nxapp.css" /> -->
     
@@ -18,17 +18,22 @@
   </head>
 <body>
     <div class="container" ng-controller="myCtrl">
-      <div ng-show="showMe">内容</div>
-      
-      <div ng-click="change()">更改</div>
+      <ul>
+        <li ng-repeat="item in menuList">
+          <a ng-href="#!/{{item.url}}" ng-if="item.url.indexOf('http://') === -1">{{item.ind}}</a>
+          <a ng-href="{{item.url}}" ng-if="item.url.indexOf('http://') > -1">{{item.ind}}</a>
+        </li>
+      </ul>
     </div>
 
     <script type="text/javascript">
       var mymodule = angular.module("myApp", []);
       mymodule.controller("myCtrl", function($scope, $location){
-        $scope.change = function(){
-          $scope.showMe = !$scope.showMe
-        }
+        $scope.menuList = [
+          {url: 'dt1.html', ind: 'index'},
+          {url: 'dt2.html', ind: 'list'},
+          {url: 'http://www.nx.10086.cn/activity_web/#/rechargeFee', ind: 'out'}
+        ]
       });
 
 
